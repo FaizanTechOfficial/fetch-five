@@ -134,9 +134,7 @@ class _GameBoardState extends State<GameBoard> {
         backgroundColor: const Color.fromARGB(255, 17, 19, 24),
         body: GetBuilder<GameBoardController>(
           builder: (controller) {
-            // State variable for the loading overlay
             return Stack(
-              // Wrap your content with a Stack
               children: [
                 SingleChildScrollView(
                   child: Center(
@@ -251,17 +249,14 @@ class _GameBoardState extends State<GameBoard> {
                                         children: [
                                           InkWell(
                                             onTap: () async {
-                                              // Show the loading overlay
                                               setState(() {
                                                 _showLoading = true;
                                               });
                                               controller.refreshScreen();
-                                              // Wait for 1 second
                                               await Future.delayed(
-                                                  const Duration(
-                                                      milliseconds: 500));
-
-                                              // Hide the loading overlay
+                                                const Duration(
+                                                    milliseconds: 500),
+                                              );
                                               setState(() {
                                                 _showLoading = false;
                                               });
@@ -271,7 +266,6 @@ class _GameBoardState extends State<GameBoard> {
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0, left: 20),
-                                              // Add 8 pixels padding on all sides
                                               child: SvgPicture.asset(
                                                 'assets/icons/refresh.svg',
                                                 height: 28,
@@ -306,347 +300,14 @@ class _GameBoardState extends State<GameBoard> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 100,
-                                      width: 420,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              ProfilePicture(
-                                                  onTap: () {
-                                                    controller
-                                                        .toggleProfileUser();
-                                                  },
-                                                  borderColor: blueColor,
-                                                  imageUrl:
-                                                      'assets/images/left_profile.png'),
-                                              const Gap(5),
-                                              SizedBox(
-                                                height: 49,
-                                                width: 75,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const Gap(5),
-                                                    const Text(
-                                                      'SeanM',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.white),
-                                                    ),
-                                                    const Gap(2),
-                                                    Expanded(
-                                                      child: ListView.separated(
-                                                        itemCount: 4,
-                                                        scrollDirection:
-                                                            Axis.horizontal,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return Container(
-                                                            width: 4.w,
-                                                            height: 12.h,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: index ==
-                                                                          0 ||
-                                                                      index == 1
-                                                                  ? blueColor
-                                                                  : const Color(
-                                                                      0xff383840),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          3),
-                                                              border:
-                                                                  Border.all(
-                                                                color: const Color(
-                                                                    0xff22222B),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        separatorBuilder:
-                                                            (context, index) {
-                                                          return const Gap(2);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          LastCardsContainer(
-                                            radius: 12.r,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 6, vertical: 1),
-                                            child: const Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Gap(1),
-                                                Text(
-                                                  'Last Cards\nPlayed',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontSize: 11,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      height: 1.15,
-                                                      color: Colors.white),
-                                                ),
-                                                IntrinsicHeight(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      LastCardPlayed(
-                                                          text: '37',
-                                                          cardColor: blueColor),
-                                                      VerticalDivider(
-                                                          color: Color.fromARGB(
-                                                              255, 66, 67, 57),
-                                                          thickness: 1,
-                                                          width: 8,
-                                                          indent: 4,
-                                                          endIndent: 4),
-                                                      LastCardPlayed(
-                                                          text: '40',
-                                                          cardColor: pinkColor)
-                                                    ],
-                                                  ),
-                                                ),
-                                                Gap(2)
-                                              ],
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                height: 49,
-                                                width: 75,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    const Gap(5),
-                                                    const Text(
-                                                      'Stella',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.white),
-                                                    ),
-                                                    const Gap(2),
-                                                    Expanded(
-                                                      child: ListView.separated(
-                                                        reverse: true,
-                                                        itemCount: 4,
-                                                        scrollDirection:
-                                                            Axis.horizontal,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return Container(
-                                                            width: 4.w,
-                                                            height: 12.h,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: const Color(
-                                                                  0xff383840),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          3),
-                                                              border:
-                                                                  Border.all(
-                                                                color: const Color(
-                                                                    0xff22222B),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        separatorBuilder:
-                                                            (context, index) {
-                                                          return const Gap(2);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const Gap(5),
-                                              ProfilePicture(
-                                                  onTap: () {
-                                                    controller
-                                                        .toggleProfileUser();
-                                                  },
-                                                  borderColor: pinkColor,
-                                                  imageUrl:
-                                                      'assets/images/right_profile.png')
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const Gap(8),
-                                    Obx(
-                                      () => SizedBox(
-                                        height: 4,
-                                        width: 450,
-                                        child: Stack(
-                                          children: [
-                                            Positioned(
-                                              left: controller
-                                                      .isUserOneActive.value
-                                                  ? 0
-                                                  : null,
-                                              right: controller
-                                                      .isUserOneActive.value
-                                                  ? null
-                                                  : 0,
-                                              child: Container(
-                                                width: 191,
-                                                height: 4,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    color: controller
-                                                            .isUserOneActive
-                                                            .value
-                                                        ? blueColor
-                                                        : pinkColor),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 450,
-                                      child: Divider(
-                                        color: Color(0xff333333),
-                                      ),
-                                    ),
-                                    const Gap(6),
-                                    SizedBox(
-                                      width: 450,
-                                      child: GridView.builder(
-                                        shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        itemCount: 100,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisSpacing: 3,
-                                          mainAxisSpacing: 3,
-                                          mainAxisExtent: 38,
-                                          crossAxisCount: 10,
-                                        ),
-                                        itemBuilder: (context, index) {
-                                          return Obx(
-                                            () => GameboardSquares(
-                                              onTap:
-                                                  !controller.drawerOpen.value
-                                                      ? () {
-                                                          controller
-                                                              .toggleActiveUser(
-                                                                  index);
-                                                          controller
-                                                              .isSquareClicked[
-                                                                  index]
-                                                              .value = true;
-                                                        }
-                                                      : null,
-                                              text: controller.numbers[index]
-                                                  .toString(),
-                                              color: controller
-                                                  .cardColors[index].value,
-                                              textColor: controller
-                                                  .textColors[index].value,
-                                              isClicked: controller
-                                                  .isSquareClicked[index].value,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    const Gap(18),
-                                    const YourCardContainer(
-                                      radius: 12,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 6, vertical: 0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Gap(1),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 6.0),
-                                                // Adjust the value as needed
-                                                child: Text(
-                                                  'Your Cards',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 1.2,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                              YourCardPlayable(
-                                                  text: '3', color: blueColor),
-                                              YourCardPlayable(
-                                                  text: '45', color: blueColor),
-                                              CardFillers(),
-                                              CardFillers()
-                                            ],
-                                          ),
-                                          Gap(1)
-                                        ],
-                                      ),
-                                    ),
-                                    const Gap(25),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        GameplayButton(
-                                          width: 220,
-                                          height: 60,
-                                          text: 'Draw a Card',
-                                          textColor: const Color.fromARGB(
-                                              255, 246, 250, 248),
-                                          onTap: () {},
-                                        ),
-                                        Gap(10.h),
-                                        GameplayButton(
-                                          width: 220,
-                                          height: 60,
-                                          text: 'Play a Square',
-                                          color: const Color(0xff2C423A),
-                                          textColor: const Color.fromARGB(
-                                              255, 124, 148, 140),
-                                          onTap: () {},
-                                        ),
+                                    IndexedStack(
+                                      index: controller.currentIndex,
+                                      children: const [
+                                        GameDesktopWidgets(),
+                                        Home(),
+                                        Instructions(),
                                       ],
                                     ),
-                                    Gap(18.h)
                                   ],
                                 ),
                               ),
@@ -711,24 +372,38 @@ class _GameBoardState extends State<GameBoard> {
                                       children: [
                                         Gap(48.h),
                                         MenuItem(
-                                            width: 80.w,
-                                            onTap: () {},
+                                            onTap: () {
+                                              controller.updateIndex(0);
+                                              Get.back();
+                                            },
+                                            svgPath:
+                                                'assets/icons/document.svg',
+                                            title: 'Game Board'),
+                                        Gap(20.h),
+                                        MenuItem(
+                                            onTap: () {
+                                              controller.updateIndex(1);
+                                              Get.back();
+                                            },
                                             svgPath: 'assets/icons/home.svg',
                                             title: 'Home'),
                                         Gap(20.h),
                                         MenuItem(
-                                            width: 80.w,
-                                            onTap: () {},
+                                            onTap: () {
+                                              controller.updateIndex(2);
+                                              Get.back();
+                                            },
                                             svgPath:
                                                 'assets/icons/document.svg',
                                             title: 'Instructions'),
                                         Gap(20.h),
                                         MenuItem(
-                                            width: 80.w,
-                                            onTap: () {},
+                                            onTap: () {
+                                              // controller.updateIndex(3);
+                                            },
                                             svgPath: 'assets/icons/resign.svg',
                                             title: 'Resign Game'),
-                                        Gap(307.h),
+                                        Gap(320.h),
                                         CustomButton(
                                           onTap: () {},
                                           color: const Color(0xffFF2124),
@@ -750,8 +425,7 @@ class _GameBoardState extends State<GameBoard> {
                                               ),
                                             ],
                                           ),
-                                        ),
-                                        Gap(15.h),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -769,6 +443,286 @@ class _GameBoardState extends State<GameBoard> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class GameDesktopWidgets extends GetView<GameBoardController> {
+  const GameDesktopWidgets({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 100,
+          width: 420,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  ProfilePicture(
+                      onTap: () {
+                        controller.toggleProfileUser();
+                      },
+                      borderColor: blueColor,
+                      imageUrl: 'assets/images/left_profile.png'),
+                  const Gap(5),
+                  SizedBox(
+                    height: 49,
+                    width: 75,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Gap(5),
+                        const Text(
+                          'SeanM',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                        const Gap(2),
+                        Expanded(
+                          child: ListView.separated(
+                            itemCount: 4,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: 4.w,
+                                height: 12.h,
+                                decoration: BoxDecoration(
+                                  color: index == 0 || index == 1
+                                      ? blueColor
+                                      : const Color(0xff383840),
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(
+                                    color: const Color(0xff22222B),
+                                  ),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Gap(2);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              LastCardsContainer(
+                radius: 12.r,
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Gap(1),
+                    Text(
+                      'Last Cards\nPlayed',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400,
+                          height: 1.15,
+                          color: Colors.white),
+                    ),
+                    IntrinsicHeight(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          LastCardPlayed(text: '37', cardColor: blueColor),
+                          VerticalDivider(
+                              color: Color.fromARGB(255, 66, 67, 57),
+                              thickness: 1,
+                              width: 8,
+                              indent: 4,
+                              endIndent: 4),
+                          LastCardPlayed(text: '40', cardColor: pinkColor)
+                        ],
+                      ),
+                    ),
+                    Gap(2)
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 49,
+                    width: 75,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Gap(5),
+                        const Text(
+                          'Stella',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                        const Gap(2),
+                        Expanded(
+                          child: ListView.separated(
+                            reverse: true,
+                            itemCount: 4,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: 4.w,
+                                height: 12.h,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff383840),
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(
+                                    color: const Color(0xff22222B),
+                                  ),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Gap(2);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(5),
+                  ProfilePicture(
+                      onTap: () {
+                        controller.toggleProfileUser();
+                      },
+                      borderColor: pinkColor,
+                      imageUrl: 'assets/images/right_profile.png')
+                ],
+              )
+            ],
+          ),
+        ),
+        const Gap(8),
+        Obx(
+          () => SizedBox(
+            height: 4,
+            width: 450,
+            child: Stack(
+              children: [
+                Positioned(
+                  left: controller.isUserOneActive.value ? 0 : null,
+                  right: controller.isUserOneActive.value ? null : 0,
+                  child: Container(
+                    width: 191,
+                    height: 4,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: controller.isUserOneActive.value
+                            ? blueColor
+                            : pinkColor),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 450,
+          child: Divider(
+            color: Color(0xff333333),
+          ),
+        ),
+        const Gap(6),
+        SizedBox(
+          width: 450,
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 100,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 3,
+              mainAxisSpacing: 3,
+              mainAxisExtent: 38,
+              crossAxisCount: 10,
+            ),
+            itemBuilder: (context, index) {
+              return Obx(
+                () => GameboardSquares(
+                  onTap: !controller.drawerOpen.value
+                      ? () {
+                          controller.toggleActiveUser(index);
+                          controller.isSquareClicked[index].value = true;
+                        }
+                      : null,
+                  text: controller.numbers[index].toString(),
+                  color: controller.cardColors[index].value,
+                  textColor: controller.textColors[index].value,
+                  isClicked: controller.isSquareClicked[index].value,
+                ),
+              );
+            },
+          ),
+        ),
+        const Gap(18),
+        const YourCardContainer(
+          radius: 12,
+          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Gap(1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 6.0),
+                    // Adjust the value as needed
+                    child: Text(
+                      'Your Cards',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        height: 1.2,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  YourCardPlayable(text: '3', color: blueColor),
+                  YourCardPlayable(text: '45', color: blueColor),
+                  CardFillers(),
+                  CardFillers()
+                ],
+              ),
+              Gap(1)
+            ],
+          ),
+        ),
+        const Gap(25),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GameplayButton(
+              width: 220,
+              height: 60,
+              text: 'Draw a Card',
+              textColor: const Color.fromARGB(255, 246, 250, 248),
+              onTap: () {},
+            ),
+            Gap(10.h),
+            GameplayButton(
+              width: 220,
+              height: 60,
+              text: 'Play a Square',
+              color: const Color(0xff2C423A),
+              textColor: const Color.fromARGB(255, 124, 148, 140),
+              onTap: () {},
+            ),
+          ],
+        ),
+        Gap(18.h)
+      ],
     );
   }
 }
