@@ -27,7 +27,7 @@ class MenuItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 14),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black),
-          color: Color(0xff2f2f2f),
+          color: const Color(0xff2f2f2f),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

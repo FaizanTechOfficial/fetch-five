@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 
 import '../../utils/const.dart';
 
-class HomeController extends GetxController
+class GameBoardController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  int currentIndex = 0;
   late AnimationController animationController;
   var drawerOpen = false.obs;
 
@@ -32,19 +33,18 @@ class HomeController extends GetxController
     super.onClose();
   }
 
+  void updateIndex(int newIndex) {
+    currentIndex = newIndex;
+    update();
+  }
+
   final key = GlobalKey<ScaffoldState>();
   RxBool isUserOneActive = true.obs;
-  RxList<int> cardNumbers = List
-      .generate(100, (_) => 0)
-      .obs;
+  RxList<int> cardNumbers = List.generate(100, (_) => 0).obs;
   RxList<Rx<Color>> cardColors =
-      List
-          .generate(100, (_) => Rx<Color>(const Color(0xff22222B)))
-          .obs;
+      List.generate(100, (_) => Rx<Color>(const Color(0xff22222B))).obs;
   RxList<Rx<Color>> textColors =
-      List
-          .generate(100, (_) => Rx<Color>(Colors.white))
-          .obs;
+      List.generate(100, (_) => Rx<Color>(Colors.white)).obs;
   final List<RxBool> isSquareClicked = List.generate(100, (index) => false.obs);
 
   List<int> numbers = [

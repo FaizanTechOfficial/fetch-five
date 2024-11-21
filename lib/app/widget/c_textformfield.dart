@@ -32,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: isPassword ? isObscured : false,
       validator: validator,
       decoration: InputDecoration(
-        fillColor: Color(0xff171e20),
+        fillColor: const Color(0xff171e20),
         filled: true,
         hintText: hintText,
         hintStyle: TextStyle(fontSize: 16.sp, color: Colors.white),
@@ -57,7 +57,7 @@ class CustomTextFormField extends StatelessWidget {
             : null,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.r),
-            borderSide: BorderSide(color: Color(0xff8b8e8f))),
+            borderSide: const BorderSide(color: Color(0xff8b8e8f))),
       ),
     );
   }

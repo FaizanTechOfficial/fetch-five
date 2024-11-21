@@ -35,7 +35,7 @@ class LoginController extends GetxController {
 
   void login() {
     if (formKey.currentState!.validate()) {
-      Get.offNamed(AppRoutes.home);
+      Get.offNamed(AppRoutes.game);
       //   Get.snackbar(
       //     "Login Success",
       //     "Welcome!",

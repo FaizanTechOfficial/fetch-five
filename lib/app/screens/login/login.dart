@@ -136,7 +136,7 @@ class Login extends StatelessWidget {
                   const Gap(32),
                   GestureDetector(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       'Forgot Password?',
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
