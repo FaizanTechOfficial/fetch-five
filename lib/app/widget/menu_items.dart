@@ -52,3 +52,54 @@ class MenuItem extends StatelessWidget {
     );
   }
 }
+
+class MenuItemDesktop extends StatelessWidget {
+  final String svgPath;
+  final String title;
+  final VoidCallback? onTap;
+  final double? width;
+
+  const MenuItemDesktop({
+    super.key,
+    required this.svgPath,
+    required this.title,
+    this.onTap,
+    this.width,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width:
+            width ?? double.infinity, // Default to full width if not provided
+        height: 52.0, // Fixed height
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 14.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          color: const Color(0xff2f2f2f),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              svgPath,
+              height: 24.0, // Fixed height
+              width: 24.0, // Fixed width
+            ),
+            const SizedBox(width: 20.0), // Gap replaced with SizedBox
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16.0, // Fixed font size
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

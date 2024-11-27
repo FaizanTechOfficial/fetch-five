@@ -27,3 +27,36 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
+class CustomButtonDesktop extends StatelessWidget {
+  final void Function()? onTap;
+  final Color? color;
+  final Widget? child;
+  final double? height;
+  final double? width;
+
+  const CustomButtonDesktop({
+    super.key,
+    this.onTap,
+    this.color,
+    this.child,
+    this.height,
+    this.width,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: width ?? double.infinity,
+        height: height ?? 64.0, // Default height as a fixed value
+        decoration: BoxDecoration(
+          color: color ?? const Color(0xff04AA6D),
+          borderRadius: BorderRadius.circular(20.0), // Fixed border radius
+        ),
+        child: child,
+      ),
+    );
+  }
+}

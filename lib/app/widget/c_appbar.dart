@@ -59,3 +59,59 @@ class CAppbar extends StatelessWidget {
     );
   }
 }
+
+class CAppbarDesktop extends StatelessWidget {
+  final VoidCallback onRefresh;
+  final VoidCallback onToggleDrawer;
+  final bool showLoading;
+
+  const CAppbarDesktop({
+    super.key,
+    required this.onRefresh,
+    required this.onToggleDrawer,
+    required this.showLoading,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 138.0,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: onRefresh,
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            child: SvgPicture.asset(
+              'assets/icons/refresh.svg',
+            ),
+          ),
+          SizedBox(
+            width: 60,
+          ),
+          Image.asset(
+            'assets/images/five_tile.png',
+            height: 66.0,
+            width: 180.0,
+          ),
+          SizedBox(
+            width: 60,
+          ),
+          InkWell(
+            onTap: onToggleDrawer,
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            child: Padding(
+              padding: EdgeInsets.only(top: 10.0, right: 20.0),
+              child: SvgPicture.asset(
+                'assets/icons/drawer.svg',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

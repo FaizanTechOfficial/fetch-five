@@ -22,13 +22,14 @@ class LastCardsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding,
-      width: 82,
-      height: 82,
+      width: 100,
+      height: 109,
       decoration: BoxDecoration(
         color: color ?? const Color(0xff22222B),
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
-          color: color == null ? const Color(0xff333333) : const Color(0xffFFFFFF),
+          color:
+              color == null ? const Color(0xff333333) : const Color(0xffFFFFFF),
         ),
       ),
       child: child,

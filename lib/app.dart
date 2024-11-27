@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.game,
+          initialRoute: AppRoutes.login,
           getPages: AppRoutes.routes,
           title: "Fetch Five",
         );
