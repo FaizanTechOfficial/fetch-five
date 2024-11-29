@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
           color: color ?? const Color(0xff04AA6D),
           borderRadius: BorderRadius.circular(20.r),
         ),
-        child: child,
+        child: Center(child: child),
       ),
     );
   }
@@ -55,7 +55,7 @@ class CustomButtonDesktop extends StatelessWidget {
           color: color ?? const Color(0xff04AA6D),
           borderRadius: BorderRadius.circular(20.0), // Fixed border radius
         ),
-        child: child,
+        child: Center(child: child),
       ),
     );
   }

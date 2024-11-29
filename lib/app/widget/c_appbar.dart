@@ -34,12 +34,10 @@ class CAppbar extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: Image.asset(
-              'assets/images/five_tile.png',
-              height: 66,
-              width: 200,
-            ),
+          Image.asset(
+            'assets/images/five_tile.png',
+            height: 66,
+            width: 200,
           ),
           InkWell(
             onTap: onToggleDrawer,
