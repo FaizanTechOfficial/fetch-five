@@ -34,16 +34,16 @@ class CreateAccountBinding extends Bindings {
   }
 }
 
-class ChooseAvatarBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => ChooseAvatarController());
-  }
-}
-
 class NewGameBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => NewGameController());
+  }
+}
+
+class ChooseAvatarBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(ChooseAvatarController());
   }
 }

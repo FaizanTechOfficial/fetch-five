@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PlayersBoxes extends StatelessWidget {
+class PlayersBoxesMobile extends StatelessWidget {
   final String image;
   final String text;
-  const PlayersBoxes({super.key, required this.image, required this.text});
+  const PlayersBoxesMobile({
+    super.key,
+    required this.image,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,44 @@ class PlayersBoxes extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class PlayersBoxesDesktop extends StatelessWidget {
+  final String image;
+  final String text;
+  const PlayersBoxesDesktop(
+      {super.key, required this.image, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xff171e20),
+        borderRadius: BorderRadius.circular(20), // Static border radius
+        border: Border.all(
+          color: const Color(0xff8b8e8f),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset(
+            image,
+            height: 48, // Static height
+            width: 48, // Static width
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 16, // Static font size
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),

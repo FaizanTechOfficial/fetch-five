@@ -124,77 +124,108 @@ class Login extends StatelessWidget {
       desktop: Scaffold(
         backgroundColor: Colors.black,
         body: Center(
-          child: SingleChildScrollView(
-            child: Form(
-              key: controller.formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/five_tile.png',
-                    width: 200,
-                  ),
-                  const Gap(80),
-                  SizedBox(
-                    height: 50,
-                    width: 400,
-                    child: CustomTextFormFieldDesktop(
-                      fontSize: 16,
-                      controller: controller.emailController,
-                      hintText: 'Email',
-                      icon: 'assets/icons/message.svg',
-                      validator: controller.validateEmail,
+          child: SizedBox(
+            width: 428,
+            child: SingleChildScrollView(
+              child: Form(
+                key: controller.formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/five_tile.png',
+                      width: 200,
                     ),
-                  ),
-                  const Gap(40),
-                  SizedBox(
-                    height: 50,
-                    width: 400,
-                    child: Obx(
-                      () => CustomTextFormFieldDesktop(
-                        controller: controller.passwordController,
-                        hintText: 'Password',
-                        icon: 'assets/icons/lock.svg',
-                        isPassword: true,
-                        onSuffixIconTap: controller.togglePasswordVisibility,
-                        isObscured: controller.isObscured.value,
-                        validator: controller.validatePassword,
+                    const Gap(80),
+                    SizedBox(
+                      height: 50,
+                      width: 400,
+                      child: CustomTextFormFieldDesktop(
+                        fontSize: 16,
+                        controller: controller.emailController,
+                        hintText: 'Email',
+                        icon: 'assets/icons/message.svg',
+                        validator: controller.validateEmail,
                       ),
                     ),
-                  ),
-                  const Gap(32),
-                  GestureDetector(
-                    onTap: () {
-                      print('Forgot Password');
-                      Get.toNamed(AppRoutes.forgotPassword);
-                    },
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    const Gap(40),
+                    SizedBox(
+                      height: 50,
+                      width: 400,
+                      child: Obx(
+                        () => CustomTextFormFieldDesktop(
+                          controller: controller.passwordController,
+                          hintText: 'Password',
+                          icon: 'assets/icons/lock.svg',
+                          isPassword: true,
+                          onSuffixIconTap: controller.togglePasswordVisibility,
+                          isObscured: controller.isObscured.value,
+                          validator: controller.validatePassword,
+                        ),
+                      ),
                     ),
-                  ),
-                  const Gap(32),
-                  CustomButton(
-                    height: 50,
-                    width: 400,
-                    onTap: controller.login,
-                    child: Row(
+                    const Gap(32),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          print('Forgot Password');
+                          Get.toNamed(AppRoutes.forgotPassword);
+                        },
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    const Gap(32),
+                    CustomButtonDesktop(
+                      height: 50,
+                      width: 400,
+                      onTap: controller.login,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/game.svg',
+                            height: 25,
+                            width: 20,
+                          ),
+                          const Gap(10),
+                          const Text(
+                            'Login to Play',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Gap(32),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(
-                          'assets/icons/game.svg',
-                          height: 25,
-                          width: 20,
+                        Text(
+                          "Don't have an account? ",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
-                        const Gap(10),
-                        const Text(
-                          'Login to Play',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.createAccount);
+                          },
+                          child: Text(
+                            'Create an Account.',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

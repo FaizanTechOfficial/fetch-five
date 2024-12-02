@@ -1,8 +1,11 @@
+import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:fetch_five/app/widget/moves_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class HomeDesktop extends GetView<DashboardController> {
@@ -15,8 +18,7 @@ class HomeDesktop extends GetView<DashboardController> {
       children: [
         Container(
           height: 168,
-          width: 368,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: const Color(0xff191e2b),
             borderRadius: BorderRadius.circular(26),
@@ -42,15 +44,15 @@ class HomeDesktop extends GetView<DashboardController> {
                           width: 6,
                         ),
                       ),
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         radius: 40,
                         backgroundImage:
-                            AssetImage('assets/images/left_profile.png'),
+                            const AssetImage('assets/images/left_profile.png'),
                         backgroundColor: Colors.grey,
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    const Text(
+                    Gap(10),
+                    Text(
                       'SeanM',
                       style: TextStyle(
                         color: Colors.white,
@@ -65,14 +67,37 @@ class HomeDesktop extends GetView<DashboardController> {
                 top: 10,
                 right: 10,
                 child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.updateIndex(2);
+                    },
                     child: SvgPicture.asset('assets/icons/edit.svg')),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 24),
-        const Text(
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton.icon(
+            onPressed: () {
+              Get.toNamed(AppRoutes.newGame);
+            },
+            iconAlignment: IconAlignment.end,
+            icon: Icon(
+              Icons.arrow_forward,
+              size: 20,
+              color: blueColor,
+            ),
+            label: Text(
+              'Start New Game',
+              style: TextStyle(
+                fontSize: 15,
+                color: blueColor,
+              ),
+            ),
+          ),
+        ),
+        Gap(10),
+        Text(
           'Your move',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -80,14 +105,13 @@ class HomeDesktop extends GetView<DashboardController> {
             fontSize: 18,
           ),
         ),
-        const SizedBox(height: 10),
+        Gap(10),
         GestureDetector(
           onTap: () {
             Get.find<DashboardController>().isOnGameBoard.value = true;
             Get.find<DashboardController>().update();
           },
           child: Container(
-            width: 368,
             decoration: BoxDecoration(
               color: const Color(0xff22222b),
               borderRadius: BorderRadius.circular(24),
@@ -98,8 +122,8 @@ class HomeDesktop extends GetView<DashboardController> {
                 subtitle: 'Langford'),
           ),
         ),
-        const SizedBox(height: 24),
-        const Text(
+        Gap(24),
+        Text(
           'Other move',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -107,14 +131,13 @@ class HomeDesktop extends GetView<DashboardController> {
             fontSize: 18,
           ),
         ),
-        const SizedBox(height: 10),
+        Gap(10),
         GestureDetector(
           onTap: () {
             Get.find<DashboardController>().isOnGameBoard.value = true;
             Get.find<DashboardController>().update();
           },
           child: Container(
-            width: 368,
             decoration: BoxDecoration(
               color: const Color(0xff22222b),
               borderRadius: BorderRadius.circular(24),
@@ -125,8 +148,8 @@ class HomeDesktop extends GetView<DashboardController> {
                 subtitle: 'Langford'),
           ),
         ),
-        const SizedBox(height: 24),
-        const Text(
+        Gap(24),
+        Text(
           'Completed',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -134,9 +157,8 @@ class HomeDesktop extends GetView<DashboardController> {
             fontSize: 18,
           ),
         ),
-        const SizedBox(height: 10),
+        Gap(10),
         Container(
-          width: 368,
           decoration: BoxDecoration(
             color: const Color(0xff22222b),
             borderRadius: BorderRadius.circular(24),

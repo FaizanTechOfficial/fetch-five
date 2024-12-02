@@ -1,13 +1,12 @@
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_controller.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ChooseAvatar extends StatelessWidget {
-  const ChooseAvatar({super.key});
+class ChooseAvatarDesktop extends GetView<ChooseAvatarController> {
+  const ChooseAvatarDesktop({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,38 +16,32 @@ class ChooseAvatar extends StatelessWidget {
         Text(
           'Choose Your Avatar',
           style: TextStyle(
-            fontSize: 18.sp,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
             color: Colors.white,
           ),
         ),
-        Gap(20.h),
+        Gap(20),
         CircleAvatar(
           backgroundColor: blueColor,
-          radius: 200 / 2.r,
+          radius: 200 / 2,
           child: CircleAvatar(
-            radius: 198 / 2.r,
+            radius: 198 / 2,
             backgroundColor: Color(0xff161620),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 28.h),
+              padding: EdgeInsets.symmetric(horizontal: 28, vertical: 28),
               child: Image.asset('assets/images/fetchfive-profile-pic-008.png'),
             ),
           ),
         ),
-        Gap(30.h),
-        SizedBox(
-          height: 620.h,
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: EdgeInsets.all(10),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            itemCount: controller.images.length,
-            itemBuilder: (context, index) {
+        Gap(30),
+        Wrap(
+          alignment: WrapAlignment.center,
+          runSpacing: 10,
+          spacing: 10,
+          children: List.generate(
+            controller.images.length,
+            (index) {
               return Obx(
                 () => Stack(
                   children: [
@@ -60,11 +53,11 @@ class ChooseAvatar extends StatelessWidget {
                         alignment: Alignment.center,
                         children: [
                           CircleAvatar(
-                            radius: 66 / 2.r,
+                            radius: 66 / 2,
                             backgroundColor: Color(0xff22222B),
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 9.w, vertical: 9.h),
+                                  horizontal: 9, vertical: 9),
                               child: Image.asset(controller.images[index]),
                             ),
                           ),
@@ -78,7 +71,7 @@ class ChooseAvatar extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   border:
                                       Border.all(color: Colors.green, width: 2),
-                                  borderRadius: BorderRadius.circular(66 / 2.r),
+                                  borderRadius: BorderRadius.circular(66 / 2),
                                 ),
                               ),
                             ),
@@ -87,10 +80,10 @@ class ChooseAvatar extends StatelessWidget {
                     ),
                     if (controller.selectedIndex.value == index)
                       Positioned(
-                        bottom: 0.h,
-                        right: 0.w,
+                        bottom: 0,
+                        right: 0,
                         child: CircleAvatar(
-                          radius: 16 / 2.r,
+                          radius: 16 / 2,
                           backgroundColor: Colors.green,
                           child: SvgPicture.asset('assets/icons/check.svg'),
                         ),
@@ -101,7 +94,7 @@ class ChooseAvatar extends StatelessWidget {
             },
           ),
         ),
-        Gap(90.h)
+        Gap(120)
       ],
     );
   }
