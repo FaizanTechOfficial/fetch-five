@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/auth/create_account/create_account_controller.dart';
 import 'package:fetch_five/app/utilities/responsive_class.dart';
 import 'package:fetch_five/app/widget/c_button.dart';
@@ -24,7 +25,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                 children: [
                   Gap(69.h),
                   Image.asset(
-                    'assets/images/five_tile.png',
+                    Assets.images.fiveTile.path,
                   ),
                   Gap(42.h),
                   Text(
@@ -39,7 +40,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                     controller: TextEditingController(),
                     //controller: controller.emailController,
                     hintText: 'Enter user name',
-                    icon: 'assets/icons/message.svg',
+                    icon: Assets.icons.message.path,
                     //validator: controller.validateEmail,
                   ),
                   Gap(5.h),
@@ -48,14 +49,14 @@ class CreateAccount extends GetView<CreateAccountController> {
                     height: 24.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Color(0xffFF5050).withOpacity(0.25),
+                      color: const Color(0xffFF5050).withOpacity(0.25),
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Center(
                       child: Text(
                         'Username: Maximum 8 characters allowed.',
                         style: TextStyle(
-                            color: Color(0xffFF5050), fontSize: 10.sp),
+                            color: const Color(0xffFF5050), fontSize: 10.sp),
                       ),
                     ),
                   ),
@@ -64,7 +65,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                     controller: TextEditingController(),
                     //controller: controller.emailController,
                     hintText: 'Email',
-                    icon: 'assets/icons/message.svg',
+                    icon: Assets.icons.message.path,
                     //validator: controller.validateEmail,
                   ),
                   Gap(5.h),
@@ -73,14 +74,14 @@ class CreateAccount extends GetView<CreateAccountController> {
                     height: 24.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Color(0xff04AA6D).withOpacity(0.25),
+                      color: const Color(0xff04AA6D).withOpacity(0.25),
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Center(
                       child: Text(
                         'Email will only be used for password recovery purposes.',
                         style: TextStyle(
-                            color: Color(0xff04AA6D), fontSize: 10.sp),
+                            color: const Color(0xff04AA6D), fontSize: 10.sp),
                       ),
                     ),
                   ),
@@ -89,7 +90,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                     controller: TextEditingController(),
                     //controller: controller.passwordController,
                     hintText: 'Password',
-                    icon: 'assets/icons/lock.svg',
+                    icon: Assets.icons.lock.path,
 
                     // onSuffixIconTap: controller.togglePasswordVisibility,
                     // isObscured: controller.isObscured.value,
@@ -100,7 +101,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                     () => CustomTextFormField(
                       //controller: controller.passwordController,
                       hintText: 'Confirm Password',
-                      icon: 'assets/icons/lock.svg',
+                      icon: Assets.icons.lock.path,
                       controller: controller.passwordController,
                       isPassword: true,
                       onSuffixIconTap: controller.togglePasswordVisibility,
@@ -116,7 +117,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                   //     controller: TextEditingController(),
                   //     //controller: controller.passwordController,
                   //     hintText: 'Password',
-                  //     icon: 'assets/icons/lock.svg',
+                  //     icon: Assets.icons.lock.path,
                   //     isPassword: true,
                   //     // onSuffixIconTap: controller.togglePasswordVisibility,
                   //     // isObscured: controller.isObscured.value,
@@ -169,40 +170,40 @@ class CreateAccount extends GetView<CreateAccountController> {
             width: 428,
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Form(
                   // key: controller.formKey,
                   child: Column(
                     children: [
                       Image.asset(
-                        'assets/images/five_tile.png',
+                        Assets.images.fiveTile.path,
                       ),
-                      Gap(42),
-                      Text(
+                      const Gap(42),
+                      const Text(
                         'Create Account',
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
-                      Gap(42),
+                      const Gap(42),
                       CustomTextFormFieldDesktop(
                         controller: TextEditingController(),
                         //controller: controller.emailController,
                         hintText: 'Enter user name',
-                        icon: 'assets/icons/message.svg',
+                        icon: Assets.icons.message.path,
                         //validator: controller.validateEmail,
                       ),
                       Gap(5.h),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 9),
+                        margin: const EdgeInsets.symmetric(horizontal: 9),
                         height: 24,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xffFF5050).withOpacity(0.25),
+                          color: const Color(0xffFF5050).withOpacity(0.25),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Username: Maximum 8 characters allowed.',
                             style: TextStyle(
@@ -210,24 +211,24 @@ class CreateAccount extends GetView<CreateAccountController> {
                           ),
                         ),
                       ),
-                      Gap(10),
+                      const Gap(10),
                       CustomTextFormFieldDesktop(
                         controller: TextEditingController(),
                         //controller: controller.emailController,
                         hintText: 'Email',
-                        icon: 'assets/icons/message.svg',
+                        icon: Assets.icons.message.path,
                         //validator: controller.validateEmail,
                       ),
                       Gap(5.h),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 9),
+                        margin: const EdgeInsets.symmetric(horizontal: 9),
                         height: 24,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xff04AA6D).withOpacity(0.25),
+                          color: const Color(0xff04AA6D).withOpacity(0.25),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Email will only be used for password recovery purposes.',
                             style: TextStyle(
@@ -235,22 +236,22 @@ class CreateAccount extends GetView<CreateAccountController> {
                           ),
                         ),
                       ),
-                      Gap(10),
+                      const Gap(10),
                       CustomTextFormFieldDesktop(
                         controller: TextEditingController(),
                         //controller: controller.passwordController,
                         hintText: 'Password',
-                        icon: 'assets/icons/lock.svg',
+                        icon: Assets.icons.lock.path,
 
                         // onSuffixIconTap: controller.togglePasswordVisibility,
                         // isObscured: controller.isObscured.value,
                         // validator: controller.validatePassword,
                       ),
-                      Gap(10),
+                      const Gap(10),
                       Obx(
                         () => CustomTextFormFieldDesktop(
                           hintText: 'Confirm Password',
-                          icon: 'assets/icons/lock.svg',
+                          icon: Assets.icons.lock.path,
                           controller: controller.passwordController,
                           isPassword: true,
                           onSuffixIconTap: controller.togglePasswordVisibility,
@@ -264,26 +265,26 @@ class CreateAccount extends GetView<CreateAccountController> {
                       //     controller: TextEditingController(),
                       //     //controller: controller.passwordController,
                       //     hintText: 'Password',
-                      //     icon: 'assets/icons/lock.svg',
+                      //     icon: Assets.icons.lock.path,
                       //     isPassword: true,
                       //     // onSuffixIconTap: controller.togglePasswordVisibility,
                       //     // isObscured: controller.isObscured.value,
                       //     // validator: controller.validatePassword,
                       //   ),
                       // ),
-                      Gap(50),
-                      CustomButton(
+                      const Gap(50),
+                      const CustomButton(
                         //onTap: controller.login,
                         child: Text(
                           'Create Account',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),
-                      Gap(50),
+                      const Gap(50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Already have an account ? Please ",
                             style: TextStyle(
                               color: Colors.white,
@@ -294,7 +295,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(
+                            child: const Text(
                               'Login',
                               style: TextStyle(
                                   fontSize: 16,
@@ -302,7 +303,7 @@ class CreateAccount extends GetView<CreateAccountController> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Gap(50)
+                          const Gap(50)
                         ],
                       )
                     ],

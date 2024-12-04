@@ -92,14 +92,15 @@ class SearchFieldDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: TextStyle(color: Colors.white, fontSize: 16), // Static font size
+      style: const TextStyle(
+          color: Colors.white, fontSize: 16), // Static font size
       enabled: enabled,
       decoration: InputDecoration(
         fillColor: const Color(0xff171e20),
         filled: true,
         hintText: hintText,
-        hintStyle:
-            TextStyle(fontSize: 16, color: Colors.white), // Static font size
+        hintStyle: const TextStyle(
+            fontSize: 16, color: Colors.white), // Static font size
         prefixIcon: Padding(
           padding: const EdgeInsets.all(20), // Static padding
           child: SvgPicture.asset(

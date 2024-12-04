@@ -39,7 +39,7 @@ class SearchDialogWidgetMobile extends StatelessWidget {
                   onPressed: () {
                     Get.back();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios_sharp,
                     color: Colors.white,
                   ),
@@ -63,7 +63,7 @@ class SearchDialogWidgetMobile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color(0xff161620),
+                  color: const Color(0xff161620),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -190,7 +190,7 @@ class SearchDialogWidgetDesktop extends StatelessWidget {
         child: SizedBox(
           width: 428,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
                 SizedBox(
@@ -201,19 +201,19 @@ class SearchDialogWidgetDesktop extends StatelessWidget {
                       onPressed: () {
                         Get.back();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios_sharp,
                         color: Colors.white,
                       ),
                     ),
                     centerTitle: true,
-                    title: Text(
+                    title: const Text(
                       'Search',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
                 ),
-                Gap(57),
+                const Gap(57),
                 SizedBox(
                   width: 428,
                   child: SearchFieldDesktop(
@@ -226,16 +226,17 @@ class SearchDialogWidgetDesktop extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   width: 428,
                   decoration: BoxDecoration(
-                    color: Color(0xff161620),
+                    color: const Color(0xff161620),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'recent searches',
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
@@ -254,13 +255,13 @@ class SearchDialogWidgetDesktop extends StatelessWidget {
                             title: Text(
                               player.name,
                             ),
-                            titleTextStyle: TextStyle(
+                            titleTextStyle: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w500),
                           );
                         },
                       ),
-                      Gap(30),
-                      Text(
+                      const Gap(30),
+                      const Text(
                         'search results',
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
@@ -277,7 +278,7 @@ class SearchDialogWidgetDesktop extends StatelessWidget {
                                   children: [
                                     SvgPicture.asset(
                                         'assets/icons/no_result.svg'),
-                                    Text(
+                                    const Text(
                                       'No results found.',
                                       style: TextStyle(
                                         fontSize: 16,
@@ -285,7 +286,7 @@ class SearchDialogWidgetDesktop extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       'Try a different search term.',
                                       style: TextStyle(
                                         fontSize: 16,
@@ -312,7 +313,7 @@ class SearchDialogWidgetDesktop extends StatelessWidget {
                                 title: Text(
                                   player.name,
                                 ),
-                                titleTextStyle: TextStyle(
+                                titleTextStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w500),
                               );
                             },

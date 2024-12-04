@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/utilities/responsive_class.dart';
 import 'package:fetch_five/app/widget/c_button.dart';
@@ -34,7 +35,7 @@ class Login extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/five_tile.png',
+                          Assets.images.fiveTile.path,
                           width: 200.w,
                         ),
                       ],
@@ -43,7 +44,8 @@ class Login extends StatelessWidget {
                     CustomTextFormField(
                       controller: controller.emailController,
                       hintText: 'Email',
-                      icon: 'assets/icons/message.svg',
+                      autofillHints: const [AutofillHints.email],
+                      icon: Assets.icons.message.path,
                       validator: controller.validateEmail,
                     ),
                     Gap(10.h),
@@ -51,7 +53,8 @@ class Login extends StatelessWidget {
                       () => CustomTextFormField(
                         controller: controller.passwordController,
                         hintText: 'Password',
-                        icon: 'assets/icons/lock.svg',
+                        autofillHints: const [AutofillHints.password],
+                        icon: Assets.icons.lock.path,
                         isPassword: true,
                         onSuffixIconTap: controller.togglePasswordVisibility,
                         isObscured: controller.isObscured.value,
@@ -61,7 +64,6 @@ class Login extends StatelessWidget {
                     Gap(32.h),
                     GestureDetector(
                       onTap: () {
-                        print('Forgot Password');
                         Get.toNamed(AppRoutes.forgotPassword);
                       },
                       child: const Text(
@@ -70,23 +72,27 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     Gap(32.h),
-                    CustomButton(
-                      onTap: controller.login,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/game.svg',
-                            height: 24.h,
-                            width: 24.w,
-                          ),
-                          Gap(10.w),
-                          Text(
-                            'Login to Play',
-                            style:
-                                TextStyle(fontSize: 16.sp, color: Colors.white),
-                          ),
-                        ],
+                    Obx(
+                      () => CustomButton(
+                        onTap: controller.login,
+                        child: controller.isLoading.value
+                            ? const CircularProgressIndicator()
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    Assets.icons.game.path,
+                                    height: 24.h,
+                                    width: 24.w,
+                                  ),
+                                  Gap(10.w),
+                                  Text(
+                                    'Login to Play',
+                                    style: TextStyle(
+                                        fontSize: 16.sp, color: Colors.white),
+                                  ),
+                                ],
+                              ),
                       ),
                     ),
                     Gap(32.h),
@@ -133,7 +139,7 @@ class Login extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/images/five_tile.png',
+                      Assets.images.fiveTile.path,
                       width: 200,
                     ),
                     const Gap(80),
@@ -144,7 +150,8 @@ class Login extends StatelessWidget {
                         fontSize: 16,
                         controller: controller.emailController,
                         hintText: 'Email',
-                        icon: 'assets/icons/message.svg',
+                        autofillHints: const [AutofillHints.email],
+                        icon: Assets.icons.message.path,
                         validator: controller.validateEmail,
                       ),
                     ),
@@ -156,7 +163,8 @@ class Login extends StatelessWidget {
                         () => CustomTextFormFieldDesktop(
                           controller: controller.passwordController,
                           hintText: 'Password',
-                          icon: 'assets/icons/lock.svg',
+                          autofillHints: const [AutofillHints.password],
+                          icon: Assets.icons.lock.path,
                           isPassword: true,
                           onSuffixIconTap: controller.togglePasswordVisibility,
                           isObscured: controller.isObscured.value,
@@ -169,7 +177,6 @@ class Login extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {
-                          print('Forgot Password');
                           Get.toNamed(AppRoutes.forgotPassword);
                         },
                         child: const Text(
@@ -179,31 +186,36 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     const Gap(32),
-                    CustomButtonDesktop(
-                      height: 50,
-                      width: 400,
-                      onTap: controller.login,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/game.svg',
-                            height: 25,
-                            width: 20,
-                          ),
-                          const Gap(10),
-                          const Text(
-                            'Login to Play',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                        ],
+                    Obx(
+                      () => CustomButtonDesktop(
+                        height: 50,
+                        width: 400,
+                        onTap: controller.login,
+                        child: controller.isLoading.value
+                            ? const CircularProgressIndicator()
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    Assets.icons.game.path,
+                                    height: 25,
+                                    width: 20,
+                                  ),
+                                  const Gap(10),
+                                  const Text(
+                                    'Login to Play',
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.white),
+                                  ),
+                                ],
+                              ),
                       ),
                     ),
                     const Gap(32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "Don't have an account? ",
                           style: TextStyle(
                             color: Colors.white,
@@ -214,7 +226,7 @@ class Login extends StatelessWidget {
                           onTap: () {
                             Get.toNamed(AppRoutes.createAccount);
                           },
-                          child: Text(
+                          child: const Text(
                             'Create an Account.',
                             style: TextStyle(
                                 fontSize: 16,

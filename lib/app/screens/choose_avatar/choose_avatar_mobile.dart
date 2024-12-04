@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_controller.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +28,10 @@ class ChooseAvatarMobile extends GetView<ChooseAvatarController> {
           radius: 200 / 2.r,
           child: CircleAvatar(
             radius: 198 / 2.r,
-            backgroundColor: Color(0xff161620),
+            backgroundColor: const Color(0xff161620),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 28.h),
-              child: Image.asset('assets/images/fetchfive-profile-pic-008.png'),
+              child: Image.asset(Assets.images.fetchfiveProfilePic008.path),
             ),
           ),
         ),
@@ -54,7 +55,7 @@ class ChooseAvatarMobile extends GetView<ChooseAvatarController> {
                         children: [
                           CircleAvatar(
                             radius: 66 / 2.r,
-                            backgroundColor: Color(0xff22222B),
+                            backgroundColor: const Color(0xff22222B),
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 9.w, vertical: 9.h),
@@ -85,7 +86,7 @@ class ChooseAvatarMobile extends GetView<ChooseAvatarController> {
                         child: CircleAvatar(
                           radius: 16 / 2.r,
                           backgroundColor: Colors.green,
-                          child: SvgPicture.asset('assets/icons/check.svg'),
+                          child: SvgPicture.asset(Assets.icons.check.path),
                         ),
                       ),
                   ],

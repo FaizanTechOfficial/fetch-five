@@ -86,7 +86,7 @@ class CAppbarDesktop extends StatelessWidget {
               'assets/icons/refresh.svg',
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 60,
           ),
           Image.asset(
@@ -94,7 +94,7 @@ class CAppbarDesktop extends StatelessWidget {
             height: 66.0,
             width: 180.0,
           ),
-          SizedBox(
+          const SizedBox(
             width: 60,
           ),
           InkWell(
@@ -102,7 +102,7 @@ class CAppbarDesktop extends StatelessWidget {
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
             child: Padding(
-              padding: EdgeInsets.only(top: 10.0, right: 20.0),
+              padding: const EdgeInsets.only(top: 10.0, right: 20.0),
               child: SvgPicture.asset(
                 'assets/icons/drawer.svg',
               ),

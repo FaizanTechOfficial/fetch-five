@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   final String icon;
   final String? Function(String?)? validator;
   final double? fontSize;
+  final Iterable<String>? autofillHints;
 
   const CustomTextFormField({
     super.key,
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.icon,
     this.validator,
     this.fontSize,
+    this.autofillHints,
   });
 
   @override
@@ -31,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
       style: TextStyle(color: Colors.white, fontSize: 16.sp),
       obscureText: isPassword ? isObscured : false,
       validator: validator,
+      autofillHints: autofillHints,
       decoration: InputDecoration(
         fillColor: const Color(0xff171e20),
         filled: true,
@@ -72,6 +75,7 @@ class CustomTextFormFieldDesktop extends StatelessWidget {
   final String icon;
   final String? Function(String?)? validator;
   final double? fontSize;
+  final Iterable<String>? autofillHints;
 
   const CustomTextFormFieldDesktop({
     super.key,
@@ -83,6 +87,7 @@ class CustomTextFormFieldDesktop extends StatelessWidget {
     required this.icon,
     this.validator,
     this.fontSize,
+    this.autofillHints,
   });
 
   @override
@@ -95,6 +100,7 @@ class CustomTextFormFieldDesktop extends StatelessWidget {
       ),
       obscureText: isPassword ? isObscured : false,
       validator: validator,
+      autofillHints: autofillHints,
       decoration: InputDecoration(
         fillColor: const Color(0xff1e2426),
         filled: true,
@@ -107,7 +113,7 @@ class CustomTextFormFieldDesktop extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: SvgPicture.asset(
             icon,
-            width: 28, // Larger icons for desktop
+            width: 28,
             height: 28,
           ),
         ),

@@ -1,13 +1,21 @@
+import 'package:fetch_five/app/routes/routes.dart';
+import 'package:fetch_five/app/services/dio_client.dart';
+import 'package:fetch_five/app/services/local/shared_pref.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class DashboardController extends GetxController
     with GetSingleTickerProviderStateMixin {
   RxBool isOnGameBoard = false.obs;
+  final _dio = Get.find<DioClient>();
+  final SharedPref pref = SharedPref();
 
   int currentIndex = 0;
   RxBool isLoading = false.obs;
+
+  RxBool screenLoading = false.obs;
   RxBool isDrawerVisible = false.obs;
   final key = GlobalKey<ScaffoldState>();
   RxBool isUserOneActive = true.obs;
@@ -17,6 +25,12 @@ class DashboardController extends GetxController
   RxList<Rx<Color>> textColors =
       List.generate(100, (_) => Rx<Color>(Colors.white)).obs;
   final List<RxBool> isSquareClicked = List.generate(100, (index) => false.obs);
+
+  @override
+  void onReady() {
+    userInfo();
+    super.onReady();
+  }
 
   void updateIndex(int newIndex) {
     isOnGameBoard.value = false;
@@ -58,6 +72,31 @@ class DashboardController extends GetxController
       isSquareClicked[i].value = false;
     }
     update();
+  }
+
+  Future<dynamic> userInfo() async {
+    try {
+      screenLoading.value = true;
+      final sessionId = await pref.getString('session_id');
+      await _dio.get('game-dashboard', sessionId: sessionId);
+    } catch (e) {
+      Logger().e(e.toString());
+    } finally {
+      screenLoading.value = false;
+    }
+  }
+
+  Future<dynamic> logout() async {
+    try {
+      isLoading.value = true;
+      final sessionId = await pref.getString('session_id');
+      await _dio.logout('game-logout', sessionId: sessionId);
+      Get.offAndToNamed(AppRoutes.login);
+    } catch (e) {
+      Logger().e(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   List<int> numbers = [

@@ -53,7 +53,7 @@ class PlayersBoxesDesktop extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xff171e20),
-        borderRadius: BorderRadius.circular(20), // Static border radius
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: const Color(0xff8b8e8f),
         ),
@@ -63,13 +63,13 @@ class PlayersBoxesDesktop extends StatelessWidget {
         children: [
           Image.asset(
             image,
-            height: 48, // Static height
-            width: 48, // Static width
+            height: 48,
+            width: 48,
           ),
           Text(
             text,
-            style: TextStyle(
-              fontSize: 16, // Static font size
+            style: const TextStyle(
+              fontSize: 16,
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),

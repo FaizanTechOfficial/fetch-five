@@ -75,7 +75,7 @@ class VisualIndicatorsDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(24.0), // Adjusted for desktop
+      padding: const EdgeInsets.all(24.0), // Adjusted for desktop
       decoration: BoxDecoration(
         color: const Color(0xff191e2b),
         borderRadius: BorderRadius.circular(26.0), // Adjusted for desktop
@@ -94,20 +94,20 @@ class VisualIndicatorsDesktop extends StatelessWidget {
             imagePath,
             height: 80.0, // Adjusted for desktop
           ),
-          SizedBox(height: 20.0), // Adjusted for desktop
+          const SizedBox(height: 20.0), // Adjusted for desktop
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20.0, // Adjusted font size for desktop
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 10.0), // Adjusted for desktop
+          const SizedBox(height: 10.0), // Adjusted for desktop
           Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16.0, // Adjusted font size for desktop
               color: Colors.white,
             ),

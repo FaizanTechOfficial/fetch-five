@@ -1,11 +1,18 @@
+import 'package:fetch_five/app/models/response_model.dart';
 import 'package:fetch_five/app/routes/routes.dart';
+import 'package:fetch_five/app/services/dio_client.dart';
+import 'package:fetch_five/app/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class LoginController extends GetxController {
+  final SharedPref pref = SharedPref();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final isObscured = true.obs;
+  final _dio = Get.find<DioClient>();
+  final RxBool isLoading = false.obs;
 
   final formKey = GlobalKey<FormState>();
 
@@ -33,36 +40,30 @@ class LoginController extends GetxController {
     isObscured.value = !isObscured.value;
   }
 
-  void login() {
+  Future<void> login() async {
     if (formKey.currentState!.validate()) {
-      Get.offNamed(AppRoutes.game);
-      //   Get.snackbar(
-      //     "Login Success",
-      //     "Welcome!",
-      //     snackPosition: SnackPosition.BOTTOM,
-      //     backgroundColor: const Color(0xff04AA6D),
-      //     colorText: Colors.white,
-      //   );
-      // } else {
-      //   Get.snackbar(
-      //     "Login Failed",
-      //     "Please check your credentials",
-      //     snackPosition: SnackPosition.BOTTOM,
-      //     backgroundColor: Colors.red,
-      //     colorText: Colors.white,
-      //   );
-      // }
-      // }
+      try {
+        isLoading.value = true;
 
-      // void forgotPassword() {
-      //   Get.snackbar(
-      //     "Forgot Password",
-      //     "Reset link sent to your email",
-      //     snackPosition: SnackPosition.BOTTOM,
-      //     backgroundColor: Colors.blue,
-      //     colorText: Colors.white,
-      //   );
-      // }
+        final result = await _dio.post(
+          'game-login',
+          data: {
+            "user_email": emailController.text.trim(),
+            "user_passwd": passwordController.text.trim(),
+          },
+        );
+
+        final data = ResponseModel.fromJson(result.data);
+        if (data.sessionId != null && data.sessionId!.isNotEmpty) {
+          await pref.putString(SharedPref.tokenKey, data.sessionId.toString());
+
+          Get.offAndToNamed(AppRoutes.game);
+        }
+      } catch (e) {
+        Logger().e(e.toString());
+      } finally {
+        isLoading.value = false;
+      }
     }
   }
 }

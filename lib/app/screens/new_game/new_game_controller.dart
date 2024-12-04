@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/models/players_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,45 +9,42 @@ class NewGameController extends GetxController {
   RxBool isNoResultsFound = false.obs;
 
   List<PlayersModel> humanPlayers1 = [
-    PlayersModel('assets/images/fetchfive-profile-pic-022.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-019.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-017.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-009.png', 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic017.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic009.path, 'Seanm'),
   ];
 
   List<PlayersModel> humanPlayers2 = [
-    PlayersModel('assets/images/fetchfive-profile-pic-010.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-019.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-014.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-015.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-016.png', 'Seanm'),
-    PlayersModel('assets/images/fetchfive-profile-pic-015.png', 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic010.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic014.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic016.path, 'Seanm'),
+    PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
   ];
 
   List<PlayersModel> humanPlayerSearch = [
-    PlayersModel('assets/images/fetchfive-profile-pic-022.png', 'One'),
-    PlayersModel('assets/images/fetchfive-profile-pic-019.png', 'Two'),
-    PlayersModel('assets/images/fetchfive-profile-pic-017.png', 'Three'),
-    PlayersModel('assets/images/fetchfive-profile-pic-009.png', 'Four'),
+    PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'One'),
+    PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Two'),
+    PlayersModel(Assets.images.fetchfiveProfilePic017.path, 'Three'),
+    PlayersModel(Assets.images.fetchfiveProfilePic009.path, 'Four'),
   ];
 
   @override
   void onInit() {
     super.onInit();
-    filteredData.assignAll(humanPlayerSearch); // Set initial filtered data
+    filteredData.assignAll(humanPlayerSearch);
 
-    // Listen for changes in the search text
     textEditingController.addListener(() {
       filterData(textEditingController.text);
     });
   }
 
-  // Method to filter data based on the search query
   void filterData(String query) {
     if (query.isEmpty) {
-      filteredData
-          .assignAll(humanPlayerSearch); // Show all data if query is empty
-      isNoResultsFound.value = false; // No results found flag reset
+      filteredData.assignAll(humanPlayerSearch);
+      isNoResultsFound.value = false;
     } else {
       var filteredList = humanPlayerSearch
           .where((player) =>
@@ -54,9 +52,9 @@ class NewGameController extends GetxController {
           .toList();
 
       if (filteredList.isEmpty) {
-        isNoResultsFound.value = true; // Set flag when no results are found
+        isNoResultsFound.value = true;
       } else {
-        isNoResultsFound.value = false; // Reset flag if results are found
+        isNoResultsFound.value = false;
       }
       filteredData.assignAll(filteredList);
     }

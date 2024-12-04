@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:fetch_five/app/widget/current_card_count.dart';
@@ -32,17 +33,17 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                       controller.toggleProfileUser();
                     },
                     borderColor: blueColor,
-                    imageUrl: 'assets/images/left_profile.png',
+                    imageUrl: Assets.images.leftProfile.path,
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   SizedBox(
                     height: 49,
                     width: 55,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 5),
-                        Text(
+                        const SizedBox(height: 5),
+                        const Text(
                           'SeanM',
                           style: TextStyle(
                             fontSize: 15,
@@ -50,7 +51,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Expanded(
                           child: ListView.separated(
                             itemCount: 4,
@@ -62,7 +63,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                               );
                             },
                             separatorBuilder: (context, index) =>
-                                SizedBox(width: 1.5),
+                                const SizedBox(width: 1.5),
                           ),
                         ),
                       ],
@@ -70,12 +71,12 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
-              LastCardsContainer(
+              const LastCardsContainer(
                 radius: 12,
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: 8,
                   vertical: 4,
                 ),
@@ -96,18 +97,18 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LastCardPlayed(
+                        LastCardPlayed(
                           text: '37',
                           cardColor: blueColor,
                         ),
                         VerticalDivider(
-                          color: const Color.fromARGB(255, 66, 67, 57),
+                          color: Color.fromARGB(255, 66, 67, 57),
                           thickness: 1,
                           width: 8,
                           indent: 4,
                           endIndent: 4,
                         ),
-                        const LastCardPlayed(
+                        LastCardPlayed(
                           text: '40',
                           cardColor: pinkColor,
                         ),
@@ -117,7 +118,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Row(
@@ -128,8 +129,8 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        SizedBox(height: 5),
-                        Text(
+                        const SizedBox(height: 5),
+                        const Text(
                           'Stella',
                           style: TextStyle(
                             fontSize: 15,
@@ -137,7 +138,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Expanded(
                           child: ListView.separated(
                             reverse: true,
@@ -147,19 +148,19 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                               return const CurrentCardCountDesktop();
                             },
                             separatorBuilder: (context, index) =>
-                                SizedBox(width: 1.5),
+                                const SizedBox(width: 1.5),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   ProfilePicture(
                     onTap: () {
                       controller.toggleProfileUser();
                     },
                     borderColor: pinkColor,
-                    imageUrl: 'assets/images/right_profile.png',
+                    imageUrl: Assets.images.rightProfile.path,
                   ),
                 ],
               ),
@@ -191,7 +192,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
             ),
           ),
         ),
-        Divider(
+        const Divider(
           color: Color(0xff333333),
         ),
         const SizedBox(height: 6),

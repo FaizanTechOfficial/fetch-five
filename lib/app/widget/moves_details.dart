@@ -17,7 +17,7 @@ class MovesDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
         ),
         child: CircleAvatar(
@@ -61,7 +61,7 @@ class MovesDetailsDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
         ),
         child: CircleAvatar(
@@ -72,7 +72,7 @@ class MovesDetailsDesktop extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 24.0, // Adjusted font size for desktop
           fontWeight: FontWeight.bold,
           color: Colors.white,
@@ -80,7 +80,7 @@ class MovesDetailsDesktop extends StatelessWidget {
       ),
       subtitle: Text(
         subtitle,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18.0, // Adjusted font size for desktop
           color: Colors.grey,
         ),

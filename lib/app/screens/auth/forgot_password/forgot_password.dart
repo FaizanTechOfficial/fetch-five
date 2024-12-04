@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/utilities/responsive_class.dart';
 import 'package:fetch_five/app/widget/c_button.dart';
 import 'package:fetch_five/app/widget/c_textformfield.dart';
@@ -21,7 +22,7 @@ class ForgotPassword extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios_sharp,
               color: Colors.white,
             ),
@@ -58,7 +59,7 @@ class ForgotPassword extends StatelessWidget {
               CustomTextFormField(
                 controller: TextEditingController(),
                 hintText: 'Enter Email Address',
-                icon: 'assets/icons/message.svg',
+                icon: Assets.icons.message.path,
               ),
               Gap(50.h),
               CustomButton(
@@ -78,7 +79,7 @@ class ForgotPassword extends StatelessWidget {
           child: SizedBox(
             width: 428,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
                   Row(
@@ -87,13 +88,13 @@ class ForgotPassword extends StatelessWidget {
                         onPressed: () {
                           Get.back();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios_sharp,
                           color: Colors.white,
                         ),
                       ),
-                      Gap(80),
-                      Text(
+                      const Gap(80),
+                      const Text(
                         'Reset Password',
                         style: TextStyle(
                           fontSize: 18,
@@ -103,28 +104,28 @@ class ForgotPassword extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Gap(50),
-                  Text(
+                  const Gap(50),
+                  const Text(
                     'Lost your way? ',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  Gap(10),
-                  Text(
+                  const Gap(10),
+                  const Text(
                     textAlign: TextAlign.center,
                     "Enter your email, and we'll help you get back into the game!",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
-                  Gap(80),
+                  const Gap(80),
                   CustomTextFormFieldDesktop(
                     controller: TextEditingController(),
                     hintText: 'Enter Email Address',
-                    icon: 'assets/icons/message.svg',
+                    icon: Assets.icons.message.path,
                   ),
-                  Gap(50),
-                  CustomButtonDesktop(
+                  const Gap(50),
+                  const CustomButtonDesktop(
                     child: Text(
                       'Send Me rest Instructions',
                       style: TextStyle(fontSize: 16, color: Colors.white),

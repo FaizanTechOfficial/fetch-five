@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class HomeMobile extends GetView<DashboardController> {
                       child: CircleAvatar(
                         radius: 40.r,
                         backgroundImage:
-                            const AssetImage('assets/images/left_profile.png'),
+                            AssetImage(Assets.images.leftProfile.path),
                         backgroundColor: Colors.grey,
                       ),
                     ),
@@ -116,8 +117,8 @@ class HomeMobile extends GetView<DashboardController> {
               color: const Color(0xff22222b),
               borderRadius: BorderRadius.circular(24.r),
             ),
-            child: const MovesDetails(
-                imagePath: 'assets/images/left_profile.png',
+            child: MovesDetails(
+                imagePath: Assets.images.leftProfile.path,
                 title: 'SeanM',
                 subtitle: 'Langford'),
           ),
@@ -142,8 +143,8 @@ class HomeMobile extends GetView<DashboardController> {
               color: const Color(0xff22222b),
               borderRadius: BorderRadius.circular(24.r),
             ),
-            child: const MovesDetails(
-                imagePath: 'assets/images/left_profile.png',
+            child: MovesDetails(
+                imagePath: Assets.images.leftProfile.path,
                 title: 'SeanM',
                 subtitle: 'Langford'),
           ),
@@ -172,8 +173,8 @@ class HomeMobile extends GetView<DashboardController> {
                     Get.find<DashboardController>().isOnGameBoard.value = true;
                     Get.find<DashboardController>().update();
                   },
-                  child: const MovesDetails(
-                      imagePath: 'assets/images/left_profile.png',
+                  child: MovesDetails(
+                      imagePath: Assets.images.leftProfile.path,
                       title: 'SeanM',
                       subtitle: 'Langford'),
                 );

@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/widget/visual_indicators.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class InstructionsDesktop extends GetView<DashboardController> {
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: Column(
-                    children: const [
+                    children: [
                       Text(
                         'Vertical',
                         style: TextStyle(
@@ -78,7 +79,7 @@ class InstructionsDesktop extends GetView<DashboardController> {
                       ),
                       SizedBox(height: 15),
                       Image(
-                        image: AssetImage('assets/images/vertical.png'),
+                        image: AssetImage(Assets.images.vertical.path),
                       ),
                     ],
                   ),
@@ -91,8 +92,8 @@ class InstructionsDesktop extends GetView<DashboardController> {
                     color: const Color(0xff22222b),
                     borderRadius: BorderRadius.circular(24),
                   ),
-                  child: Column(
-                    children: const [
+                  child: const Column(
+                    children: [
                       Text(
                         'Horizontal',
                         style: TextStyle(
@@ -116,9 +117,9 @@ class InstructionsDesktop extends GetView<DashboardController> {
                     color: const Color(0xff22222b),
                     borderRadius: BorderRadius.circular(24),
                   ),
-                  child: Column(
+                  child: const Column(
                     children: [
-                      const Text(
+                      Text(
                         'Diagonal',
                         style: TextStyle(
                           fontSize: 12,
@@ -130,7 +131,7 @@ class InstructionsDesktop extends GetView<DashboardController> {
                         height: 106,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Image(
                               image:
                                   AssetImage('assets/images/diagonal_one.png'),

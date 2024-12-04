@@ -8,7 +8,7 @@ class GameBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(
+    return const Responsive(
         mobile: GameBoardMobileView(), desktop: GameBoardDesktopView());
   }
 }

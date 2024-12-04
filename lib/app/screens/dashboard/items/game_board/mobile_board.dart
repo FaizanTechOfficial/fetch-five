@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:fetch_five/app/widget/current_card_count.dart';
@@ -33,7 +34,7 @@ class GameBoardMobileView extends GetView<DashboardController> {
                       controller.toggleProfileUser();
                     },
                     borderColor: blueColor,
-                    imageUrl: 'assets/images/left_profile.png',
+                    imageUrl: Assets.images.leftProfile.path,
                   ),
                   SizedBox(width: 5.w),
                   SizedBox(
@@ -151,7 +152,7 @@ class GameBoardMobileView extends GetView<DashboardController> {
                       controller.toggleProfileUser();
                     },
                     borderColor: pinkColor,
-                    imageUrl: 'assets/images/right_profile.png',
+                    imageUrl: Assets.images.rightProfile.path,
                   ),
                 ],
               ),

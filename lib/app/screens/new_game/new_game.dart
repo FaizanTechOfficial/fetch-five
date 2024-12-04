@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/new_game/components/players_boxes.dart';
 import 'package:fetch_five/app/screens/new_game/components/search_dialog_widget.dart';
 import 'package:fetch_five/app/screens/new_game/components/search_field.dart';
@@ -23,14 +24,14 @@ class NewGame extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios_sharp,
               color: Colors.white,
             ),
           ),
           centerTitle: true,
           title: Image.asset(
-            'assets/images/five_tile.png',
+            Assets.images.fiveTile.path,
             height: 50.h,
           ),
         ),
@@ -60,9 +61,9 @@ class NewGame extends StatelessWidget {
                       barrierLabel: 'Hello',
                       barrierDismissible: true,
                       barrierColor: Colors.black.withOpacity(0.5),
-                      transitionDuration: Duration(milliseconds: 300),
+                      transitionDuration: const Duration(milliseconds: 300),
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return SearchDialogWidgetMobile();
+                        return const SearchDialogWidgetMobile();
                       },
                       transitionBuilder:
                           (context, animation, secondaryAnimation, child) {
@@ -85,8 +86,8 @@ class NewGame extends StatelessWidget {
                     enabled: false,
                     controller: TextEditingController(),
                     hintText: 'Search',
-                    searchIcon: 'assets/icons/Search.svg',
-                    filterIcon: 'assets/icons/Filter.svg',
+                    searchIcon: Assets.icons.search.path,
+                    filterIcon: Assets.icons.filter.path,
                     onFilterTap: () {},
                   ),
                 ),
@@ -101,7 +102,7 @@ class NewGame extends StatelessWidget {
                 Gap(20.h),
                 GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisExtent: 88.h,
                     mainAxisSpacing: 18.w,
@@ -127,7 +128,7 @@ class NewGame extends StatelessWidget {
                 Gap(20.h),
                 GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisExtent: 88.h,
                     mainAxisSpacing: 18.w,
@@ -155,7 +156,7 @@ class NewGame extends StatelessWidget {
             width: 428,
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -165,19 +166,19 @@ class NewGame extends StatelessWidget {
                         onPressed: () {
                           Get.back();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios_sharp,
                           color: Colors.white,
                         ),
                       ),
                       centerTitle: true,
                       title: Image.asset(
-                        'assets/images/five_tile.png',
+                        Assets.images.fiveTile.path,
                         height: 50,
                       ),
                     ),
-                    Gap(50),
-                    Align(
+                    const Gap(50),
+                    const Align(
                       alignment: Alignment.center,
                       child: Text(
                         'Start a New Game',
@@ -188,7 +189,7 @@ class NewGame extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Gap(20),
+                    const Gap(20),
                     GestureDetector(
                       onTap: () {
                         showGeneralDialog(
@@ -196,10 +197,10 @@ class NewGame extends StatelessWidget {
                           barrierLabel: 'Hello',
                           barrierDismissible: true,
                           barrierColor: Colors.black.withOpacity(0.5),
-                          transitionDuration: Duration(milliseconds: 300),
+                          transitionDuration: const Duration(milliseconds: 300),
                           pageBuilder:
                               (context, animation, secondaryAnimation) {
-                            return SearchDialogWidgetDesktop();
+                            return const SearchDialogWidgetDesktop();
                           },
                           transitionBuilder:
                               (context, animation, secondaryAnimation, child) {
@@ -222,24 +223,25 @@ class NewGame extends StatelessWidget {
                         enabled: false,
                         controller: TextEditingController(),
                         hintText: 'Search',
-                        searchIcon: 'assets/icons/Search.svg',
-                        filterIcon: 'assets/icons/Filter.svg',
+                        searchIcon: Assets.icons.search.path,
+                        filterIcon: Assets.icons.filter.path,
                         onFilterTap: () {},
                       ),
                     ),
-                    Gap(30),
-                    Text(
+                    const Gap(30),
+                    const Text(
                       'Human Players',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    Gap(20),
+                    const Gap(20),
                     GridView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         mainAxisExtent: 88,
                         mainAxisSpacing: 18,
                         crossAxisSpacing: 10,
@@ -253,19 +255,20 @@ class NewGame extends StatelessWidget {
                         );
                       },
                     ),
-                    Gap(30),
-                    Text(
+                    const Gap(30),
+                    const Text(
                       'Human Players',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    Gap(20),
+                    const Gap(20),
                     GridView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         mainAxisExtent: 88,
                         mainAxisSpacing: 18,
                         crossAxisSpacing: 10,
@@ -279,7 +282,7 @@ class NewGame extends StatelessWidget {
                         );
                       },
                     ),
-                    Gap(30),
+                    const Gap(30),
                   ],
                 ),
               ),

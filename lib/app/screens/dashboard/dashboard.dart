@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_desktop.dart';
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_mobile.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
@@ -36,7 +37,7 @@ class DashBoard extends StatelessWidget {
                 right: 42.w,
                 top: 120.h,
                 child: Image.asset(
-                  'assets/images/polygon.png',
+                  Assets.images.polygon.path,
                 ),
               ),
               SingleChildScrollView(
@@ -65,7 +66,7 @@ class DashBoard extends StatelessWidget {
                                 controller.updateIndex(0);
                                 Get.back();
                               },
-                              svgPath: 'assets/icons/home.svg',
+                              svgPath: Assets.icons.home.path,
                               title: 'Home'),
                           Gap(20.h),
                           MenuItem(
@@ -73,36 +74,42 @@ class DashBoard extends StatelessWidget {
                                 controller.updateIndex(1);
                                 Get.back();
                               },
-                              svgPath: 'assets/icons/document.svg',
+                              svgPath: Assets.icons.document.path,
                               title: 'Instructions'),
                           Gap(20.h),
                           MenuItem(
                               onTap: () {
                                 // controller.updateIndex(3);
                               },
-                              svgPath: 'assets/icons/resign.svg',
+                              svgPath: Assets.icons.resign.path,
                               title: 'Resign Game'),
                           Gap(320.h),
-                          CustomButton(
-                            onTap: () {},
-                            color: const Color(0xffFF2124),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/icons/logout.svg',
-                                  height: 24.h,
-                                  width: 24.w,
-                                ),
-                                Gap(10.w),
-                                const Text(
-                                  'Logout',
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.white),
-                                ),
-                              ],
+                          Obx(
+                            () => CustomButton(
+                              onTap: controller.logout,
+                              color: const Color(0xffFF2124),
+                              child: controller.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          Assets.icons.logout.path,
+                                          height: 24.h,
+                                          width: 24.w,
+                                        ),
+                                        Gap(10.w),
+                                        const Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -146,16 +153,16 @@ class DashBoard extends StatelessWidget {
                             showLoading: controller.isLoading.value,
                           ),
                           if (controller.isOnGameBoard.value)
-                            GameBoardMobileView(),
+                            const GameBoardMobileView(),
                           if (!controller.isOnGameBoard.value &&
                               controller.currentIndex == 0)
-                            HomeMobile(),
+                            const HomeMobile(),
                           if (!controller.isOnGameBoard.value &&
                               controller.currentIndex == 1)
-                            InstructionsMobile(),
+                            const InstructionsMobile(),
                           if (!controller.isOnGameBoard.value &&
                               controller.currentIndex == 2)
-                            ChooseAvatarMobile(),
+                            const ChooseAvatarMobile(),
                           const SizedBox(height: 40),
                         ],
                       ),
@@ -176,7 +183,7 @@ class DashBoard extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return SizedBox.shrink();
+                      return const SizedBox.shrink();
                     }
                   },
                 ),
@@ -245,16 +252,16 @@ class DashBoard extends StatelessWidget {
                                 showLoading: controller.isLoading.value,
                               ),
                               if (controller.isOnGameBoard.value)
-                                GameBoardDesktopView(),
+                                const GameBoardDesktopView(),
                               if (!controller.isOnGameBoard.value &&
                                   controller.currentIndex == 0)
-                                HomeDesktop(),
+                                const HomeDesktop(),
                               if (!controller.isOnGameBoard.value &&
                                   controller.currentIndex == 1)
-                                InstructionsDesktop(),
+                                const InstructionsDesktop(),
                               if (!controller.isOnGameBoard.value &&
                                   controller.currentIndex == 2)
-                                ChooseAvatarDesktop(),
+                                const ChooseAvatarDesktop(),
                               const SizedBox(height: 40),
                             ],
                           ),
@@ -282,7 +289,7 @@ class DashBoard extends StatelessWidget {
                               right: 45,
                               top: 112,
                               child: Image.asset(
-                                'assets/images/polygon.png',
+                                Assets.images.polygon.path,
                               ),
                             ),
                             Positioned(
@@ -294,9 +301,9 @@ class DashBoard extends StatelessWidget {
                                     MediaQuery.of(context).size.height - 140,
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 24),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xff181818),
-                                  borderRadius: const BorderRadius.only(
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff181818),
+                                  borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     bottomLeft: Radius.circular(20),
                                   ),
@@ -310,7 +317,7 @@ class DashBoard extends StatelessWidget {
                                         controller.updateIndex(0);
                                         controller.closeDrawer();
                                       },
-                                      svgPath: 'assets/icons/home.svg',
+                                      svgPath: Assets.icons.home.path,
                                       title: 'Home',
                                     ),
                                     const SizedBox(height: 20),
@@ -319,7 +326,7 @@ class DashBoard extends StatelessWidget {
                                         controller.updateIndex(1);
                                         controller.closeDrawer();
                                       },
-                                      svgPath: 'assets/icons/document.svg',
+                                      svgPath: Assets.icons.document.path,
                                       title: 'Instructions',
                                     ),
                                     const SizedBox(height: 20),
@@ -328,31 +335,35 @@ class DashBoard extends StatelessWidget {
                                         // controller.updateIndex(3);
                                         controller.closeDrawer();
                                       },
-                                      svgPath: 'assets/icons/resign.svg',
+                                      svgPath: Assets.icons.resign.path,
                                       title: 'Resign Game',
                                     ),
-                                    Spacer(),
-                                    CustomButtonDesktop(
-                                      onTap: () {},
-                                      color: const Color(0xffFF2124),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/icons/logout.svg',
-                                            height: 24,
-                                            width: 24,
-                                          ),
-                                          const SizedBox(width: 10),
-                                          const Text(
-                                            'Logout',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
+                                    const Spacer(),
+                                    Obx(
+                                      () => CustomButtonDesktop(
+                                        onTap: controller.logout,
+                                        color: const Color(0xffFF2124),
+                                        child: controller.isLoading.value
+                                            ? const CircularProgressIndicator()
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    Assets.icons.logout.path,
+                                                    height: 24,
+                                                    width: 24,
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  const Text(
+                                                    'Logout',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                       ),
                                     ),
                                     const SizedBox(height: 20),
@@ -362,7 +373,7 @@ class DashBoard extends StatelessWidget {
                             ),
                           ]);
                         } else {
-                          return SizedBox.shrink();
+                          return const SizedBox.shrink();
                         }
                       },
                     ),
@@ -380,7 +391,7 @@ class DashBoard extends StatelessWidget {
                             ),
                           );
                         } else {
-                          return SizedBox.shrink();
+                          return const SizedBox.shrink();
                         }
                       },
                     ),
@@ -396,13 +407,13 @@ class DashBoard extends StatelessWidget {
                 ? Container(
                     width: 428,
                     height: 134,
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         left: 24, right: 24, top: 20, bottom: 50),
                     decoration: const BoxDecoration(
                       color: Color(0xff0A0A14),
                     ),
                     child: CustomButtonDesktop(
-                      child: Text(
+                      child: const Text(
                         'Select',
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),

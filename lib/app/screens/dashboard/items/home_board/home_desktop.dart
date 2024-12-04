@@ -1,9 +1,9 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:fetch_five/app/widget/moves_details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,7 @@ class HomeDesktop extends GetView<DashboardController> {
       children: [
         Container(
           height: 168,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: const Color(0xff191e2b),
             borderRadius: BorderRadius.circular(26),
@@ -47,12 +47,12 @@ class HomeDesktop extends GetView<DashboardController> {
                       child: CircleAvatar(
                         radius: 40,
                         backgroundImage:
-                            const AssetImage('assets/images/left_profile.png'),
+                            AssetImage(Assets.images.leftProfile.path),
                         backgroundColor: Colors.grey,
                       ),
                     ),
-                    Gap(10),
-                    Text(
+                    const Gap(10),
+                    const Text(
                       'SeanM',
                       style: TextStyle(
                         color: Colors.white,
@@ -82,12 +82,12 @@ class HomeDesktop extends GetView<DashboardController> {
               Get.toNamed(AppRoutes.newGame);
             },
             iconAlignment: IconAlignment.end,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_forward,
               size: 20,
               color: blueColor,
             ),
-            label: Text(
+            label: const Text(
               'Start New Game',
               style: TextStyle(
                 fontSize: 15,
@@ -96,8 +96,8 @@ class HomeDesktop extends GetView<DashboardController> {
             ),
           ),
         ),
-        Gap(10),
-        Text(
+        const Gap(10),
+        const Text(
           'Your move',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class HomeDesktop extends GetView<DashboardController> {
             fontSize: 18,
           ),
         ),
-        Gap(10),
+        const Gap(10),
         GestureDetector(
           onTap: () {
             Get.find<DashboardController>().isOnGameBoard.value = true;
@@ -116,14 +116,14 @@ class HomeDesktop extends GetView<DashboardController> {
               color: const Color(0xff22222b),
               borderRadius: BorderRadius.circular(24),
             ),
-            child: const MovesDetailsDesktop(
-                imagePath: 'assets/images/left_profile.png',
+            child: MovesDetailsDesktop(
+                imagePath: Assets.images.leftProfile.path,
                 title: 'SeanM',
                 subtitle: 'Langford'),
           ),
         ),
-        Gap(24),
-        Text(
+        const Gap(24),
+        const Text(
           'Other move',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -131,7 +131,7 @@ class HomeDesktop extends GetView<DashboardController> {
             fontSize: 18,
           ),
         ),
-        Gap(10),
+        const Gap(10),
         GestureDetector(
           onTap: () {
             Get.find<DashboardController>().isOnGameBoard.value = true;
@@ -142,14 +142,14 @@ class HomeDesktop extends GetView<DashboardController> {
               color: const Color(0xff22222b),
               borderRadius: BorderRadius.circular(24),
             ),
-            child: const MovesDetailsDesktop(
-                imagePath: 'assets/images/left_profile.png',
+            child: MovesDetailsDesktop(
+                imagePath: Assets.images.leftProfile.path,
                 title: 'SeanM',
                 subtitle: 'Langford'),
           ),
         ),
-        Gap(24),
-        Text(
+        const Gap(24),
+        const Text(
           'Completed',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class HomeDesktop extends GetView<DashboardController> {
             fontSize: 18,
           ),
         ),
-        Gap(10),
+        const Gap(10),
         Container(
           decoration: BoxDecoration(
             color: const Color(0xff22222b),
@@ -172,8 +172,8 @@ class HomeDesktop extends GetView<DashboardController> {
                     Get.find<DashboardController>().isOnGameBoard.value = true;
                     Get.find<DashboardController>().update();
                   },
-                  child: const MovesDetailsDesktop(
-                      imagePath: 'assets/images/left_profile.png',
+                  child: MovesDetailsDesktop(
+                      imagePath: Assets.images.leftProfile.path,
                       title: 'SeanM',
                       subtitle: 'Langford'),
                 );

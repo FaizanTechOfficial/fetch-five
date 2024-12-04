@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fetch_five/app/widget/visual_indicators.dart';
@@ -72,7 +73,7 @@ class InstructionsMobile extends GetView<DashboardController> {
                         color: Colors.white),
                   ),
                   Gap(15.h),
-                  Image.asset('assets/images/vertical.png')
+                  Image.asset(Assets.images.vertical.path)
                 ],
               ),
             ),
@@ -94,7 +95,7 @@ class InstructionsMobile extends GetView<DashboardController> {
                         color: Colors.white),
                   ),
                   Gap(15.h),
-                  Image.asset('assets/images/horizontal.png')
+                  Image.asset(Assets.images.horizontal.path)
                 ],
               ),
             ),
@@ -121,11 +122,11 @@ class InstructionsMobile extends GetView<DashboardController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/diagonal_one.png',
+                          Assets.images.diagonalOne.path,
                           width: 61.w,
                         ),
                         Image.asset(
-                          'assets/images/diagonal_two.png',
+                          Assets.images.diagonalTwo.path,
                           width: 61.w,
                         ),
                       ],
@@ -179,22 +180,22 @@ class InstructionsMobile extends GetView<DashboardController> {
           ),
         ),
         Gap(10.h),
-        const VisualIndicators(
-          imagePath: 'assets/images/occ_box.png',
+        VisualIndicators(
+          imagePath: Assets.images.occBox.path,
           title: "Opponent's Card Count",
           description:
               "The number cards your opponent is currently holding is depicted by the number card icons filled with solid colors.",
         ),
         Gap(10.h),
-        const VisualIndicators(
-          imagePath: 'assets/images/occ_pink.png',
+        VisualIndicators(
+          imagePath: Assets.images.occPink.path,
           title: "Opponent's Card Count",
           description:
               "The number cards your opponent is currently holding is depicted by the number card icons filled with solid colors.",
         ),
         Gap(10.h),
-        const VisualIndicators(
-          imagePath: 'assets/images/occ_blue.png',
+        VisualIndicators(
+          imagePath: Assets.images.occBlue.path,
           title: "Opponent's Card Count",
           description:
               "The number cards your opponent is currently holding is depicted by the number card icons filled with solid colors.",

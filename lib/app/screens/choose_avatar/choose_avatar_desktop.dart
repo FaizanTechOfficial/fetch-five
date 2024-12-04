@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_controller.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class ChooseAvatarDesktop extends GetView<ChooseAvatarController> {
     final controller = Get.put(ChooseAvatarController());
     return Column(
       children: [
-        Text(
+        const Text(
           'Choose Your Avatar',
           style: TextStyle(
             fontSize: 18,
@@ -21,20 +22,20 @@ class ChooseAvatarDesktop extends GetView<ChooseAvatarController> {
             color: Colors.white,
           ),
         ),
-        Gap(20),
+        const Gap(20),
         CircleAvatar(
           backgroundColor: blueColor,
           radius: 200 / 2,
           child: CircleAvatar(
             radius: 198 / 2,
-            backgroundColor: Color(0xff161620),
+            backgroundColor: const Color(0xff161620),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 28, vertical: 28),
-              child: Image.asset('assets/images/fetchfive-profile-pic-008.png'),
+              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 28),
+              child: Image.asset(Assets.images.fetchfiveProfilePic008.path),
             ),
           ),
         ),
-        Gap(30),
+        const Gap(30),
         Wrap(
           alignment: WrapAlignment.center,
           runSpacing: 10,
@@ -54,9 +55,9 @@ class ChooseAvatarDesktop extends GetView<ChooseAvatarController> {
                         children: [
                           CircleAvatar(
                             radius: 66 / 2,
-                            backgroundColor: Color(0xff22222B),
+                            backgroundColor: const Color(0xff22222B),
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 9, vertical: 9),
                               child: Image.asset(controller.images[index]),
                             ),
@@ -85,7 +86,7 @@ class ChooseAvatarDesktop extends GetView<ChooseAvatarController> {
                         child: CircleAvatar(
                           radius: 16 / 2,
                           backgroundColor: Colors.green,
-                          child: SvgPicture.asset('assets/icons/check.svg'),
+                          child: SvgPicture.asset(Assets.icons.check.path),
                         ),
                       ),
                   ],
@@ -94,7 +95,7 @@ class ChooseAvatarDesktop extends GetView<ChooseAvatarController> {
             },
           ),
         ),
-        Gap(120)
+        const Gap(120)
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:fetch_five/app/bindings/services_bindings.dart';
 import 'package:fetch_five/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.login,
           getPages: AppRoutes.routes,
+          initialBinding: ServicesBindings(),
           title: "Fetch Five",
         );
       },
