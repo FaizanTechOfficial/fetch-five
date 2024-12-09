@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<!-- <resources>
     <color name="splash_background">#111318</color> 
+</resources> -->
+<resources>
+    <!-- Other color definitions -->
+
+    <!-- Define black color -->
+    <color name="black">#000000</color>
+
+    <!-- If you already have splash_background color, you can update it to black -->
+    <color name="splash_background">#000000</color>
 </resources>

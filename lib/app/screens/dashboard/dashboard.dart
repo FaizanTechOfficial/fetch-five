@@ -133,14 +133,7 @@ class DashBoard extends StatelessWidget {
                         children: [
                           const Gap(18),
                           CAppbar(
-                            onRefresh: () async {
-                              controller.startLoading();
-                              controller.refreshScreen();
-                              await Future.delayed(
-                                  const Duration(milliseconds: 500), () {
-                                controller.stopLoading();
-                              });
-                            },
+                            onRefresh: controller.playerInfo,
                             onToggleDrawer: () {
                               if (controller
                                       .key.currentState?.isEndDrawerOpen ??
@@ -215,191 +208,192 @@ class DashBoard extends StatelessWidget {
       ),
       desktop: Scaffold(
         backgroundColor: const Color.fromARGB(255, 17, 19, 24),
-        body: Center(
-          child: SizedBox(
-            width: 428,
-            child: GetBuilder<DashboardController>(
-              builder: (controller) {
-                return Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        if (controller.isDrawerVisible.value == true) {
-                          controller.closeDrawer();
-                        }
-                      },
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const SizedBox(height: 18),
-                              CAppbarDesktop(
-                                onRefresh: () async {
-                                  controller.startLoading();
-                                  controller.refreshScreen();
-                                  await Future.delayed(
-                                      const Duration(milliseconds: 500), () {
-                                    controller.stopLoading();
-                                  });
-                                },
-                                onToggleDrawer: () {
-                                  controller.isDrawerVisible.value
-                                      ? controller.closeDrawer()
-                                      : controller.openDrawer();
-                                },
-                                showLoading: controller.isLoading.value,
-                              ),
-                              if (controller.isOnGameBoard.value)
-                                const GameBoardDesktopView(),
-                              if (!controller.isOnGameBoard.value &&
-                                  controller.currentIndex == 0)
-                                const HomeDesktop(),
-                              if (!controller.isOnGameBoard.value &&
-                                  controller.currentIndex == 1)
-                                const InstructionsDesktop(),
-                              if (!controller.isOnGameBoard.value &&
-                                  controller.currentIndex == 2)
-                                const ChooseAvatarDesktop(),
-                              const SizedBox(height: 40),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Obx(
-                      () => Visibility(
-                        visible: controller.isDrawerVisible.value,
-                        child: GestureDetector(
+        body: Column(
+          children: [
+            Center(
+              child: SizedBox(
+                width: 428,
+                child: GetBuilder<DashboardController>(
+                  builder: (controller) {
+                    return Stack(
+                      children: [
+                        GestureDetector(
                           onTap: () {
-                            controller.closeDrawer();
+                            if (controller.isDrawerVisible.value == true) {
+                              controller.closeDrawer();
+                            }
                           },
-                          child: Container(
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Obx(
-                      () {
-                        if (controller.isDrawerVisible.value) {
-                          return Stack(children: [
-                            Positioned(
-                              right: 45,
-                              top: 112,
-                              child: Image.asset(
-                                Assets.images.polygon.path,
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const SizedBox(height: 18),
+                                  CAppbarDesktop(
+                                    onRefresh: controller.playerInfo,
+                                    onToggleDrawer: () {
+                                      controller.isDrawerVisible.value
+                                          ? controller.closeDrawer()
+                                          : controller.openDrawer();
+                                    },
+                                    showLoading: controller.isLoading.value,
+                                  ),
+                                  if (controller.isOnGameBoard.value)
+                                    const GameBoardDesktopView(),
+                                  if (!controller.isOnGameBoard.value &&
+                                      controller.currentIndex == 0)
+                                    const HomeDesktop(),
+                                  if (!controller.isOnGameBoard.value &&
+                                      controller.currentIndex == 1)
+                                    const InstructionsDesktop(),
+                                  if (!controller.isOnGameBoard.value &&
+                                      controller.currentIndex == 2)
+                                    const ChooseAvatarDesktop(),
+                                  const SizedBox(height: 40),
+                                ],
                               ),
                             ),
-                            Positioned(
-                              right: 0,
-                              top: 134,
+                          ),
+                        ),
+                        Obx(
+                          () => Visibility(
+                            visible: controller.isDrawerVisible.value,
+                            child: GestureDetector(
+                              onTap: () {
+                                controller.closeDrawer();
+                              },
                               child: Container(
-                                width: 265,
-                                height:
-                                    MediaQuery.of(context).size.height - 140,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 24),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xff181818),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Obx(
+                          () {
+                            if (controller.isDrawerVisible.value) {
+                              return Stack(children: [
+                                Positioned(
+                                  right: 45,
+                                  top: 112,
+                                  child: Image.asset(
+                                    Assets.images.polygon.path,
                                   ),
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 48),
-                                    MenuItemDesktop(
-                                      onTap: () {
-                                        controller.updateIndex(0);
-                                        controller.closeDrawer();
-                                      },
-                                      svgPath: Assets.icons.home.path,
-                                      title: 'Home',
-                                    ),
-                                    const SizedBox(height: 20),
-                                    MenuItemDesktop(
-                                      onTap: () {
-                                        controller.updateIndex(1);
-                                        controller.closeDrawer();
-                                      },
-                                      svgPath: Assets.icons.document.path,
-                                      title: 'Instructions',
-                                    ),
-                                    const SizedBox(height: 20),
-                                    MenuItemDesktop(
-                                      onTap: () {
-                                        // controller.updateIndex(3);
-                                        controller.closeDrawer();
-                                      },
-                                      svgPath: Assets.icons.resign.path,
-                                      title: 'Resign Game',
-                                    ),
-                                    const Spacer(),
-                                    Obx(
-                                      () => CustomButtonDesktop(
-                                        onTap: controller.logout,
-                                        color: const Color(0xffFF2124),
-                                        child: controller.isLoading.value
-                                            ? const CircularProgressIndicator()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    Assets.icons.logout.path,
-                                                    height: 24,
-                                                    width: 24,
-                                                  ),
-                                                  const SizedBox(width: 10),
-                                                  const Text(
-                                                    'Logout',
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                Positioned(
+                                  right: 0,
+                                  top: 134,
+                                  child: Container(
+                                    width: 265,
+                                    height: MediaQuery.of(context).size.height -
+                                        140,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24),
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xff181818),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20),
                                       ),
                                     ),
-                                    const SizedBox(height: 20),
-                                  ],
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 48),
+                                        MenuItemDesktop(
+                                          onTap: () {
+                                            controller.updateIndex(0);
+                                            controller.closeDrawer();
+                                          },
+                                          svgPath: Assets.icons.home.path,
+                                          title: 'Home',
+                                        ),
+                                        const SizedBox(height: 20),
+                                        MenuItemDesktop(
+                                          onTap: () {
+                                            controller.updateIndex(1);
+                                            controller.closeDrawer();
+                                          },
+                                          svgPath: Assets.icons.document.path,
+                                          title: 'Instructions',
+                                        ),
+                                        const SizedBox(height: 20),
+                                        MenuItemDesktop(
+                                          onTap: () {
+                                            // controller.updateIndex(3);
+                                            controller.closeDrawer();
+                                          },
+                                          svgPath: Assets.icons.resign.path,
+                                          title: 'Resign Game',
+                                        ),
+                                        const Spacer(),
+                                        Obx(
+                                          () => CustomButtonDesktop(
+                                            onTap: controller.logout,
+                                            color: const Color(0xffFF2124),
+                                            child: controller.isLoading.value
+                                                ? const CircularProgressIndicator()
+                                                : Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      SvgPicture.asset(
+                                                        Assets
+                                                            .icons.logout.path,
+                                                        height: 24,
+                                                        width: 24,
+                                                      ),
+                                                      const SizedBox(width: 10),
+                                                      const Text(
+                                                        'Logout',
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ]);
-                        } else {
-                          return const SizedBox.shrink();
-                        }
-                      },
-                    ),
-                    Obx(
-                      () {
-                        if (controller.isLoading.value) {
-                          return Container(
-                            color: Colors.black.withOpacity(0.5),
-                            child: const Center(
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Color.fromARGB(255, 99, 81, 159),
+                              ]);
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        ),
+                        Obx(
+                          () {
+                            if (controller.isLoading.value) {
+                              return Container(
+                                color: Colors.black.withOpacity(0.5),
+                                child: const Center(
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Color.fromARGB(255, 99, 81, 159),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          );
-                        } else {
-                          return const SizedBox.shrink();
-                        }
-                      },
-                    ),
-                  ],
-                );
-              },
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-          ),
+          ],
         ),
         bottomSheet: GetBuilder<DashboardController>(
           builder: (controller) {

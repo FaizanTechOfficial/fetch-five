@@ -18,14 +18,14 @@ class DioClient extends GetxService {
     )..interceptors.addAll([LoggerInterceptor()]);
   }
 
-  Future<Response> post(String url, {dynamic data}) async {
+  Future<Response> post(String url, {Map<String, dynamic>? data}) async {
     return _dio.post(url, data: data);
   }
 
   Future<Response> get(String url, {dynamic sessionId}) async {
     return _dio.get(
       url,
-      options: Options(headers: {'Authorization': "bearer ${sessionId}"}),
+      options: Options(headers: {'Authorization': "bearer $sessionId"}),
     );
   }
 

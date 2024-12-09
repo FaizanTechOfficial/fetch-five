@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovesDetails extends StatelessWidget {
-  final String imagePath;
+  final ImageProvider<Object>? backgroundImage;
   final String title;
   final String subtitle;
 
   const MovesDetails({
     super.key,
-    required this.imagePath,
     required this.title,
     required this.subtitle,
+    this.backgroundImage,
   });
 
   @override
@@ -22,7 +22,7 @@ class MovesDetails extends StatelessWidget {
         ),
         child: CircleAvatar(
           radius: 24.r,
-          backgroundImage: AssetImage(imagePath),
+          backgroundImage: backgroundImage,
           backgroundColor: Colors.white,
         ),
       ),
@@ -46,15 +46,15 @@ class MovesDetails extends StatelessWidget {
 }
 
 class MovesDetailsDesktop extends StatelessWidget {
-  final String imagePath;
   final String title;
   final String subtitle;
+  final ImageProvider<Object>? backgroundImage;
 
   const MovesDetailsDesktop({
     super.key,
-    required this.imagePath,
     required this.title,
     required this.subtitle,
+    this.backgroundImage,
   });
 
   @override
@@ -65,15 +65,15 @@ class MovesDetailsDesktop extends StatelessWidget {
           shape: BoxShape.circle,
         ),
         child: CircleAvatar(
-          radius: 30.0, // Adjusted for desktop
-          backgroundImage: AssetImage(imagePath),
+          radius: 30.0,
+          backgroundImage: backgroundImage,
           backgroundColor: Colors.white,
         ),
       ),
       title: Text(
         title,
         style: const TextStyle(
-          fontSize: 24.0, // Adjusted font size for desktop
+          fontSize: 24.0,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
@@ -81,7 +81,7 @@ class MovesDetailsDesktop extends StatelessWidget {
       subtitle: Text(
         subtitle,
         style: const TextStyle(
-          fontSize: 18.0, // Adjusted font size for desktop
+          fontSize: 18.0,
           color: Colors.grey,
         ),
       ),

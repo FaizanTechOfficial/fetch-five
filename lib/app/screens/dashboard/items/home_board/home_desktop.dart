@@ -13,175 +13,274 @@ class HomeDesktop extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: 168,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: const Color(0xff191e2b),
-            borderRadius: BorderRadius.circular(26),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Stack(
-            children: [
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: blueColor,
-                          width: 6,
+    if (controller.currentIndex == 0) {
+      controller.playerInfo();
+    }
+
+    return Obx(
+      () => controller.screenLoading.value
+          ? const CircularProgressIndicator()
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  height: 168,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: const Color(0xff191e2b),
+                    borderRadius: BorderRadius.circular(26),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: blueColor,
+                                  width: 6,
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage: controller.playerInfoModel
+                                                .playerProfilePic !=
+                                            null &&
+                                        controller.playerInfoModel
+                                            .playerProfilePic!.isNotEmpty
+                                    ? NetworkImage(
+                                        "$imageBaseUrl${controller.playerInfoModel.playerProfilePic}")
+                                    : AssetImage(
+                                        Assets.images.leftProfile.path),
+                                backgroundColor: Colors.grey,
+                              ),
+                            ),
+                            const Gap(10),
+                            Text(
+                              controller.playerInfoModel.playerName ?? 'none',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundImage:
-                            AssetImage(Assets.images.leftProfile.path),
-                        backgroundColor: Colors.grey,
+                      Positioned(
+                        top: 10,
+                        right: 10,
+                        child: GestureDetector(
+                            onTap: () {
+                              controller.updateIndex(2);
+                            },
+                            child: SvgPicture.asset('assets/icons/edit.svg')),
                       ),
-                    ),
-                    const Gap(10),
-                    const Text(
-                      'SeanM',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: GestureDetector(
-                    onTap: () {
-                      controller.updateIndex(2);
-                    },
-                    child: SvgPicture.asset('assets/icons/edit.svg')),
-              ),
-            ],
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton.icon(
-            onPressed: () {
-              Get.toNamed(AppRoutes.newGame);
-            },
-            iconAlignment: IconAlignment.end,
-            icon: const Icon(
-              Icons.arrow_forward,
-              size: 20,
-              color: blueColor,
-            ),
-            label: const Text(
-              'Start New Game',
-              style: TextStyle(
-                fontSize: 15,
-                color: blueColor,
-              ),
-            ),
-          ),
-        ),
-        const Gap(10),
-        const Text(
-          'Your move',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontSize: 18,
-          ),
-        ),
-        const Gap(10),
-        GestureDetector(
-          onTap: () {
-            Get.find<DashboardController>().isOnGameBoard.value = true;
-            Get.find<DashboardController>().update();
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xff22222b),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: MovesDetailsDesktop(
-                imagePath: Assets.images.leftProfile.path,
-                title: 'SeanM',
-                subtitle: 'Langford'),
-          ),
-        ),
-        const Gap(24),
-        const Text(
-          'Other move',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontSize: 18,
-          ),
-        ),
-        const Gap(10),
-        GestureDetector(
-          onTap: () {
-            Get.find<DashboardController>().isOnGameBoard.value = true;
-            Get.find<DashboardController>().update();
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xff22222b),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: MovesDetailsDesktop(
-                imagePath: Assets.images.leftProfile.path,
-                title: 'SeanM',
-                subtitle: 'Langford'),
-          ),
-        ),
-        const Gap(24),
-        const Text(
-          'Completed',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontSize: 18,
-          ),
-        ),
-        const Gap(10),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color(0xff22222b),
-            borderRadius: BorderRadius.circular(24),
-          ),
-          child: Column(
-            children: List.generate(
-              4,
-              (index) {
-                return GestureDetector(
-                  onTap: () {
-                    Get.find<DashboardController>().isOnGameBoard.value = true;
-                    Get.find<DashboardController>().update();
+                TextButton.icon(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.newGame);
                   },
-                  child: MovesDetailsDesktop(
-                      imagePath: Assets.images.leftProfile.path,
-                      title: 'SeanM',
-                      subtitle: 'Langford'),
-                );
-              },
+                  iconAlignment: IconAlignment.end,
+                  icon: const Icon(
+                    Icons.arrow_forward,
+                    size: 20,
+                    color: blueColor,
+                  ),
+                  label: const Text(
+                    'Start New Game',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: blueColor,
+                    ),
+                  ),
+                ),
+                const Gap(10),
+                controller.completedTurnGame.isNotEmpty
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.yourTurnLabel.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const Gap(10),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xff22222b),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Column(
+                              children: List.generate(
+                                controller.yourTurnGame.length,
+                                (index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.find<DashboardController>()
+                                          .isUserOneActive
+                                          .value = controller
+                                              .yourTurnGame[index]
+                                              .thisPlayersTurn ??
+                                          false;
+                                      Get.find<DashboardController>()
+                                          .isOnGameBoard
+                                          .value = true;
+                                      Get.find<DashboardController>().update();
+                                    },
+                                    child: MovesDetailsDesktop(
+                                      backgroundImage: controller
+                                                      .yourTurnGame[index]
+                                                      .opponentProfilePic !=
+                                                  null &&
+                                              controller
+                                                  .yourTurnGame[index]
+                                                  .opponentProfilePic!
+                                                  .isNotEmpty
+                                          ? NetworkImage(
+                                              "$imageBaseUrl${controller.yourTurnGame[index].opponentProfilePic}")
+                                          : AssetImage(
+                                              Assets.images.leftProfile.path),
+                                      title: controller
+                                          .yourTurnGame[index].opponentName
+                                          .toString(),
+                                      subtitle: controller
+                                          .yourTurnGame[index].squaresPlayed
+                                          .toString(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          const Gap(24),
+                          Text(
+                            controller.theirTurnLabel.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const Gap(10),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xff22222b),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Column(
+                              children: List.generate(
+                                controller.theirTurnGame.length,
+                                (index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.find<DashboardController>()
+                                          .isUserOneActive
+                                          .value = controller
+                                              .theirTurnGame[index]
+                                              .thisPlayersTurn ??
+                                          false;
+                                      Get.find<DashboardController>()
+                                          .isOnGameBoard
+                                          .value = true;
+                                      Get.find<DashboardController>().update();
+                                    },
+                                    child: MovesDetailsDesktop(
+                                      backgroundImage: controller
+                                                      .theirTurnGame[index]
+                                                      .opponentProfilePic !=
+                                                  null &&
+                                              controller
+                                                  .theirTurnGame[index]
+                                                  .opponentProfilePic!
+                                                  .isNotEmpty
+                                          ? NetworkImage(
+                                              "$imageBaseUrl${controller.theirTurnGame[index].opponentProfilePic}")
+                                          : AssetImage(
+                                              Assets.images.leftProfile.path),
+                                      title: controller
+                                          .theirTurnGame[index].opponentName
+                                          .toString(),
+                                      subtitle: controller
+                                          .theirTurnGame[index].squaresPlayed
+                                          .toString(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          const Gap(24),
+                          Text(
+                            controller.completedTurnLabel.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const Gap(10),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xff22222b),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Column(
+                              children: List.generate(
+                                controller.completedTurnGame.length,
+                                (index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.find<DashboardController>()
+                                          .isOnGameBoard
+                                          .value = true;
+                                      Get.find<DashboardController>().update();
+                                    },
+                                    child: MovesDetailsDesktop(
+                                      backgroundImage: controller
+                                                      .completedTurnGame[index]
+                                                      .opponentProfilePic !=
+                                                  null &&
+                                              controller
+                                                  .completedTurnGame[index]
+                                                  .opponentProfilePic!
+                                                  .isNotEmpty
+                                          ? NetworkImage(
+                                              "$imageBaseUrl${controller.completedTurnGame[index].opponentProfilePic}")
+                                          : AssetImage(
+                                              Assets.images.leftProfile.path),
+                                      title: controller
+                                          .completedTurnGame[index].opponentName
+                                          .toString(),
+                                      subtitle: controller
+                                          .yourTurnGame[index].squaresPlayed
+                                          .toString(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox(),
+              ],
             ),
-          ),
-        ),
-      ],
     );
   }
 }

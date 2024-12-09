@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:fetch_five/app/models/response_model.dart';
 import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/services/dio_client.dart';
 import 'package:fetch_five/app/services/local/shared_pref.dart';
+import 'package:fetch_five/app/utils/const.dart';
+import 'package:fetch_five/app/utils/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -56,8 +59,18 @@ class LoginController extends GetxController {
         final data = ResponseModel.fromJson(result.data);
         if (data.sessionId != null && data.sessionId!.isNotEmpty) {
           await pref.putString(SharedPref.tokenKey, data.sessionId.toString());
+          await pref.putString(SharedPref.lastRouteKey, RouteState.login.name);
 
           Get.offAndToNamed(AppRoutes.game);
+        }
+      } on DioException catch (e) {
+        if (e.type == DioExceptionType.badResponse) {
+          Get.snackbar(
+              'Unauthorized', 'You are not authorized to perform this action.',
+              backgroundColor: const Color(0xff22222b),
+              colorText: Colors.white);
+        } else {
+          handleDioException(e);
         }
       } catch (e) {
         Logger().e(e.toString());

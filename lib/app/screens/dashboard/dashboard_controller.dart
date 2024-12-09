@@ -1,7 +1,13 @@
+import 'package:dio/dio.dart';
+import 'package:fetch_five/app/models/dashboard_game_model.dart';
+import 'package:fetch_five/app/models/game_model.dart';
+import 'package:fetch_five/app/models/games_model.dart';
+import 'package:fetch_five/app/models/player_info_model.dart';
 import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/services/dio_client.dart';
 import 'package:fetch_five/app/services/local/shared_pref.dart';
 import 'package:fetch_five/app/utils/const.dart';
+import 'package:fetch_five/app/utils/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -11,6 +17,15 @@ class DashboardController extends GetxController
   RxBool isOnGameBoard = false.obs;
   final _dio = Get.find<DioClient>();
   final SharedPref pref = SharedPref();
+  ActiveGamesTurn activeGamesTurn = ActiveGamesTurn();
+  PlayerInfoModel playerInfoModel = PlayerInfoModel();
+
+  List<GameModel> completedTurnGame = [];
+  List<GameModel> yourTurnGame = [];
+  List<GameModel> theirTurnGame = [];
+  String yourTurnLabel = '';
+  String theirTurnLabel = '';
+  String completedTurnLabel = '';
 
   int currentIndex = 0;
   RxBool isLoading = false.obs;
@@ -27,8 +42,14 @@ class DashboardController extends GetxController
   final List<RxBool> isSquareClicked = List.generate(100, (index) => false.obs);
 
   @override
+  void onInit() {
+    pref.putString(SharedPref.lastRouteKey, RouteState.home.name);
+    super.onInit();
+  }
+
+  @override
   void onReady() {
-    userInfo();
+    playerInfo();
     super.onReady();
   }
 
@@ -74,15 +95,38 @@ class DashboardController extends GetxController
     update();
   }
 
-  Future<dynamic> userInfo() async {
+  Future<dynamic> playerInfo() async {
     try {
       screenLoading.value = true;
       final sessionId = await pref.getString('session_id');
-      await _dio.get('game-dashboard', sessionId: sessionId);
+      final result = await _dio.get('game-dashboard', sessionId: sessionId);
+
+      final DashboardGameModel dashboardGameModel =
+          DashboardGameModel.fromJson(result.data);
+
+      playerInfoModel = dashboardGameModel.playerInfo ??
+          PlayerInfoModel(playerName: '', playerProfilePic: '');
+
+      final gamesModel = dashboardGameModel.games;
+
+      final ActiveGamesTurn? completedTurn = gamesModel?.completedGames;
+      final ActiveGamesTurn? yourTurn = gamesModel?.activeGamesYourTurn;
+      final ActiveGamesTurn? thierTurn = gamesModel?.activeGamesTheirTurn;
+
+      yourTurnLabel = yourTurn?.label ?? '';
+      theirTurnLabel = thierTurn?.label ?? '';
+      completedTurnLabel = completedTurn?.label ?? '';
+
+      completedTurnGame = completedTurn?.games ?? [];
+      yourTurnGame = yourTurn?.games ?? [];
+      theirTurnGame = thierTurn?.games ?? [];
+    } on DioException catch (e) {
+      handleDioException(e);
     } catch (e) {
       Logger().e(e.toString());
     } finally {
       screenLoading.value = false;
+      update();
     }
   }
 
@@ -91,7 +135,10 @@ class DashboardController extends GetxController
       isLoading.value = true;
       final sessionId = await pref.getString('session_id');
       await _dio.logout('game-logout', sessionId: sessionId);
-      Get.offAndToNamed(AppRoutes.login);
+      await pref.clear();
+      Get.offAllNamed(AppRoutes.login);
+    } on DioException catch (e) {
+      handleDioException(e);
     } catch (e) {
       Logger().e(e.toString());
     } finally {
