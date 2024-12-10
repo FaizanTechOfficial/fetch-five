@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:fetch_five/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 
 void handleDioException(DioException e) {
   if (e.type == DioExceptionType.connectionError) {
@@ -13,8 +13,11 @@ void handleDioException(DioException e) {
         backgroundColor: const Color(0xff22222b), colorText: Colors.white);
   } else if (e.type == DioExceptionType.receiveTimeout) {
     Get.snackbar(
-        'Response Timeout', 'The request timed out while receiving data.',
-        backgroundColor: const Color(0xff22222b), colorText: Colors.white);
+      'Response Timeout',
+      'The request timed out while receiving data.',
+      backgroundColor: const Color(0xff22222b),
+      colorText: Colors.white,
+    );
   } else if (e.type == DioExceptionType.badResponse) {
     if (e.response != null) {
       int? statusCode = e.response?.statusCode;
@@ -25,6 +28,9 @@ void handleDioException(DioException e) {
       } else if (statusCode == 401) {
         Get.snackbar('Session Expired', 'Please Login again',
             backgroundColor: const Color(0xff22222b), colorText: Colors.white);
+        Future.delayed(const Duration(seconds: 1), () {
+          Get.offAllNamed(AppRoutes.login);
+        });
       } else if (statusCode == 403) {
         Get.snackbar(
             'Forbidden', 'Access to the requested resource is forbidden.',

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fetch_five/app/models/dashboard_game_model.dart';
+import 'package:fetch_five/app/models/game_details_model.dart';
 import 'package:fetch_five/app/models/game_model.dart';
 import 'package:fetch_five/app/models/games_model.dart';
 import 'package:fetch_five/app/models/player_info_model.dart';
@@ -23,13 +24,16 @@ class DashboardController extends GetxController
   List<GameModel> completedTurnGame = [];
   List<GameModel> yourTurnGame = [];
   List<GameModel> theirTurnGame = [];
+
+  String selectedGameId = '';
+  String selectedTurnType = '';
+
+  Rx<GameDetailModel> gameDetails = Rx<GameDetailModel>(GameDetailModel());
   String yourTurnLabel = '';
   String theirTurnLabel = '';
   String completedTurnLabel = '';
-
   int currentIndex = 0;
   RxBool isLoading = false.obs;
-
   RxBool screenLoading = false.obs;
   RxBool isDrawerVisible = false.obs;
   final key = GlobalKey<ScaffoldState>();
@@ -127,6 +131,58 @@ class DashboardController extends GetxController
     } finally {
       screenLoading.value = false;
       update();
+    }
+  }
+
+  Future<void> getYourTurnGameDetails(String gameId) async {
+    try {
+      screenLoading.value = true;
+      selectedGameId = gameId;
+      selectedTurnType = 'your';
+
+      final yourTurnDetailsResponse =
+          await _dio.post('game-details', data: {"game_id": gameId});
+
+      gameDetails.value =
+          GameDetailModel.fromJson(yourTurnDetailsResponse.data);
+    } catch (e) {
+      Logger().e(e);
+    } finally {
+      screenLoading.value = false;
+    }
+  }
+
+  Future<void> getTheirTurnGameDetails(String gameId) async {
+    try {
+      screenLoading.value = true;
+      selectedGameId = gameId;
+      selectedTurnType = 'their';
+      final theirTurnDetailsResponse =
+          await _dio.post('game-details', data: {"game_id": gameId});
+
+      gameDetails.value =
+          GameDetailModel.fromJson(theirTurnDetailsResponse.data);
+    } catch (e) {
+      Logger().e(e);
+    } finally {
+      screenLoading.value = false;
+    }
+  }
+
+  Future<void> getCompletedGameDetails(String gameId) async {
+    try {
+      selectedTurnType = 'completed';
+      screenLoading.value = true;
+      selectedGameId = gameId;
+      final getCompletedGameDetails =
+          await _dio.post('game-details', data: {"game_id": gameId});
+
+      gameDetails.value =
+          GameDetailModel.fromJson(getCompletedGameDetails.data);
+    } catch (e) {
+      Logger().e(e);
+    } finally {
+      screenLoading.value = false;
     }
   }
 

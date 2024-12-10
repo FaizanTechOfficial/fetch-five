@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fetch_five/app/services/interceptor/logger_interceptor.dart';
+import 'package:fetch_five/app/services/local/shared_pref.dart';
 import 'package:get/get.dart' hide Response;
 
 class DioClient extends GetxService {
@@ -19,7 +20,11 @@ class DioClient extends GetxService {
   }
 
   Future<Response> post(String url, {Map<String, dynamic>? data}) async {
-    return _dio.post(url, data: data);
+    final token = await SharedPref().getString(SharedPref.tokenKey);
+
+    return _dio.post(url,
+        data: data,
+        options: Options(headers: {'Authorization': "bearer ${token}"}));
   }
 
   Future<Response> get(String url, {dynamic sessionId}) async {

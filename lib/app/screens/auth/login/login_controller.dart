@@ -47,7 +47,6 @@ class LoginController extends GetxController {
     if (formKey.currentState!.validate()) {
       try {
         isLoading.value = true;
-
         final result = await _dio.post(
           'game-login',
           data: {

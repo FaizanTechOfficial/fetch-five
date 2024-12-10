@@ -1,4 +1,3 @@
-import 'package:fetch_five/app.dart';
 import 'package:fetch_five/app/bindings/services_bindings.dart';
 import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/services/local/shared_pref.dart';

@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfilePicture extends StatelessWidget {
-  final String imageUrl;
   final Color borderColor;
   final void Function()? onTap;
+  final ImageProvider<Object>? backgroundImage;
 
   const ProfilePicture(
-      {super.key,
-      required this.imageUrl,
-      required this.borderColor,
-      this.onTap});
+      {super.key, required this.borderColor, this.onTap, this.backgroundImage});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +24,7 @@ class ProfilePicture extends StatelessWidget {
         ),
         child: CircleAvatar(
           radius: 24.r,
-          backgroundImage: AssetImage(imageUrl),
+          backgroundImage: backgroundImage,
           backgroundColor: Colors.white,
         ),
       ),

@@ -11,6 +11,7 @@ import 'package:fetch_five/app/widget/your_card_filler.dart';
 import 'package:fetch_five/app/widget/your_card_playable.dart';
 import 'package:fetch_five/app/widget/your_cards_container.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class GameBoardDesktopView extends GetView<DashboardController> {
@@ -33,7 +34,8 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                       controller.toggleProfileUser();
                     },
                     borderColor: blueColor,
-                    imageUrl: Assets.images.leftProfile.path,
+                    backgroundImage: NetworkImage(
+                        "$imageBaseUrl${controller.gameDetails.value.playerOneProfilePic}"),
                   ),
                   const SizedBox(width: 10),
                   SizedBox(
@@ -43,10 +45,11 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 5),
-                        const Text(
-                          'SeanM',
+                        Text(
+                          controller.gameDetails.value.playerOneName.toString(),
                           style: TextStyle(
                             fontSize: 15,
+                            overflow: TextOverflow.ellipsis,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
                           ),
@@ -57,9 +60,11 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                             itemCount: 4,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
+                              bool isBlue = index <
+                                  controller
+                                      .gameDetails.value.playerOneCardCount!;
                               return CurrentCardCountDesktop(
-                                color:
-                                    index == 0 || index == 1 ? blueColor : null,
+                                color: isBlue ? blueColor : null,
                               );
                             },
                             separatorBuilder: (context, index) =>
@@ -74,7 +79,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
               const SizedBox(
                 width: 20,
               ),
-              const LastCardsContainer(
+              LastCardsContainer(
                 radius: 12,
                 padding: EdgeInsets.symmetric(
                   horizontal: 8,
@@ -98,7 +103,9 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LastCardPlayed(
-                          text: '37',
+                          text: controller.gameDetails.value.playerOneLastCard
+                                  ?.toString() ??
+                              '0',
                           cardColor: blueColor,
                         ),
                         VerticalDivider(
@@ -109,7 +116,9 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                           endIndent: 4,
                         ),
                         LastCardPlayed(
-                          text: '40',
+                          text: controller.gameDetails.value.playerTwoLastCard
+                                  ?.toString() ??
+                              '0',
                           cardColor: pinkColor,
                         ),
                       ],
@@ -130,11 +139,12 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const SizedBox(height: 5),
-                        const Text(
-                          'Stella',
+                        Text(
+                          controller.gameDetails.value.playerTwoName.toString(),
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
+                            overflow: TextOverflow.ellipsis,
                             color: Colors.white,
                           ),
                         ),
@@ -145,7 +155,12 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                             itemCount: 4,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return const CurrentCardCountDesktop();
+                              bool isBlue = index <
+                                  controller
+                                      .gameDetails.value.playerTwoCardCount!;
+                              return CurrentCardCountDesktop(
+                                color: isBlue ? blueColor : null,
+                              );
                             },
                             separatorBuilder: (context, index) =>
                                 const SizedBox(width: 1.5),
@@ -160,7 +175,8 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                       controller.toggleProfileUser();
                     },
                     borderColor: pinkColor,
-                    imageUrl: Assets.images.rightProfile.path,
+                    backgroundImage: NetworkImage(
+                        "$imageBaseUrl${controller.gameDetails.value.playerTwoProfilePic}"),
                   ),
                 ],
               ),
@@ -182,9 +198,13 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                     height: 4,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: controller.isUserOneActive.value
-                          ? blueColor
-                          : pinkColor,
+                      color:
+                          controller.gameDetails.value.thisPlayersTurn == true
+                              ? (controller.gameDetails.value.thisPlayer ==
+                                      "player_one"
+                                  ? blueColor
+                                  : pinkColor)
+                              : pinkColor,
                     ),
                   ),
                 ),
@@ -214,44 +234,87 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                   controller.isSquareClicked[index].value = true;
                 },
                 text: controller.numbers[index].toString(),
-                color: controller.cardColors[index].value,
-                textColor: controller.textColors[index].value,
+                color: controller.gameDetails.value.thisPlayer == 'player_one'
+                    ? controller.gameDetails.value.thisPlayersTurn == true
+                        ? controller.gameDetails.value.playerOneSquares!
+                                .contains(controller.numbers[index])
+                            ? blueColor
+                            : controller.gameDetails.value.playerTwoSquares!
+                                    .contains(controller.numbers[index])
+                                ? pinkColor
+                                : const Color(0xff22222B)
+                        : controller.gameDetails.value.playerOneSquares!
+                                .contains(controller.numbers[index])
+                            ? blueColor
+                            : controller.gameDetails.value.playerTwoSquares!
+                                    .contains(controller.numbers[index])
+                                ? pinkColor
+                                : const Color(0xff22222B)
+                    : controller.gameDetails.value.thisPlayersTurn == true
+                        ? controller.gameDetails.value.playerOneSquares!
+                                .contains(controller.numbers[index])
+                            ? blueColor
+                            : controller.gameDetails.value.playerTwoSquares!
+                                    .contains(controller.numbers[index])
+                                ? pinkColor
+                                : const Color(0xff22222B)
+                        : controller.gameDetails.value.playerTwoSquares!
+                                .contains(controller.numbers[index])
+                            ? blueColor
+                            : controller.gameDetails.value.playerOneSquares!
+                                    .contains(controller.numbers[index])
+                                ? pinkColor
+                                : const Color(0xff22222B),
+                textColor: controller.gameDetails.value.playerOneSquares!
+                            .contains(controller.numbers[index]) ||
+                        controller.gameDetails.value.playerTwoSquares!
+                            .contains(controller.numbers[index])
+                    ? Colors.transparent
+                    : controller.textColors[index].value,
                 isClicked: controller.isSquareClicked[index].value,
               ),
             );
           },
         ),
         const SizedBox(height: 18),
-        const YourCardContainer(
+        YourCardContainer(
           radius: 12,
-          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-          child: Column(
+          padding: EdgeInsets.symmetric(vertical: 6),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 6.0),
-                    child: Text(
-                      'Your Cards',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        height: 1.2,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  YourCardPlayable(text: '3', color: blueColor),
-                  YourCardPlayable(text: '45', color: blueColor),
-                  CardFillers(),
-                  CardFillers()
-                ],
+              Gap(1),
+              Text(
+                'Your Cards',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  height: 1.2,
+                  color: Colors.white,
+                ),
               ),
-              SizedBox(height: 4)
+              ListView.separated(
+                shrinkWrap: true,
+                itemCount: 4,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  bool isPlayable =
+                      index < controller.gameDetails.value.playerHand!.length;
+
+                  if (isPlayable) {
+                    return YourCardPlayable(
+                      text: controller.gameDetails.value.playerHand![index]
+                          .toString(),
+                      color: blueColor,
+                    );
+                  } else {
+                    return CardFillers();
+                  }
+                },
+                separatorBuilder: (context, index) => SizedBox(width: 10),
+              ),
+              Gap(1)
             ],
           ),
         ),

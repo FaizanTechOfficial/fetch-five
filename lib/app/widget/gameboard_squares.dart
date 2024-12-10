@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class GameboardSquares extends StatelessWidget {
+class GameboardSquaresMobile extends StatelessWidget {
   final String text;
   final void Function()? onTap;
   final Color color;
   final Color textColor;
   final bool isClicked;
 
-  const GameboardSquares({
+  const GameboardSquaresMobile({
     super.key,
     required this.text,
     this.onTap,

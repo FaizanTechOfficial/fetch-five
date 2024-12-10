@@ -132,16 +132,26 @@ class HomeDesktop extends GetView<DashboardController> {
                                 (index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Get.find<DashboardController>()
-                                          .isUserOneActive
-                                          .value = controller
-                                              .yourTurnGame[index]
-                                              .thisPlayersTurn ??
-                                          false;
-                                      Get.find<DashboardController>()
-                                          .isOnGameBoard
-                                          .value = true;
-                                      Get.find<DashboardController>().update();
+                                      if (controller
+                                              .yourTurnGame[index].gameId !=
+                                          null) {
+                                        controller.getYourTurnGameDetails(
+                                          controller
+                                              .yourTurnGame[index].gameId!,
+                                        );
+                                        Get.find<DashboardController>()
+                                            .isUserOneActive
+                                            .value = controller
+                                                .yourTurnGame[index]
+                                                .thisPlayersTurn ??
+                                            false;
+
+                                        Get.find<DashboardController>()
+                                            .isOnGameBoard
+                                            .value = true;
+                                        Get.find<DashboardController>()
+                                            .update();
+                                      }
                                     },
                                     child: MovesDetailsDesktop(
                                       backgroundImage: controller
@@ -188,17 +198,27 @@ class HomeDesktop extends GetView<DashboardController> {
                                 controller.theirTurnGame.length,
                                 (index) {
                                   return GestureDetector(
-                                    onTap: () {
-                                      Get.find<DashboardController>()
-                                          .isUserOneActive
-                                          .value = controller
-                                              .theirTurnGame[index]
-                                              .thisPlayersTurn ??
-                                          false;
-                                      Get.find<DashboardController>()
-                                          .isOnGameBoard
-                                          .value = true;
-                                      Get.find<DashboardController>().update();
+                                    onTap: () async {
+                                      if (controller
+                                              .theirTurnGame[index].gameId !=
+                                          null) {
+                                        controller.getTheirTurnGameDetails(
+                                          controller
+                                              .theirTurnGame[index].gameId!,
+                                        );
+                                        Get.find<DashboardController>()
+                                            .isUserOneActive
+                                            .value = controller
+                                                .theirTurnGame[index]
+                                                .thisPlayersTurn ??
+                                            false;
+
+                                        Get.find<DashboardController>()
+                                            .isOnGameBoard
+                                            .value = true;
+                                        Get.find<DashboardController>()
+                                            .update();
+                                      }
                                     },
                                     child: MovesDetailsDesktop(
                                       backgroundImage: controller
@@ -246,10 +266,19 @@ class HomeDesktop extends GetView<DashboardController> {
                                 (index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Get.find<DashboardController>()
-                                          .isOnGameBoard
-                                          .value = true;
-                                      Get.find<DashboardController>().update();
+                                      if (controller.completedTurnGame[index]
+                                              .gameId !=
+                                          null) {
+                                        controller.getCompletedGameDetails(
+                                          controller
+                                              .completedTurnGame[index].gameId!,
+                                        );
+                                        Get.find<DashboardController>()
+                                            .isOnGameBoard
+                                            .value = true;
+                                        Get.find<DashboardController>()
+                                            .update();
+                                      }
                                     },
                                     child: MovesDetailsDesktop(
                                       backgroundImage: controller
