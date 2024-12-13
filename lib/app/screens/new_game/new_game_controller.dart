@@ -1,12 +1,21 @@
+import 'package:dio/dio.dart';
 import 'package:fetch_five/app/data/gen/assets.gen.dart';
+import 'package:fetch_five/app/models/new_game_model.dart';
 import 'package:fetch_five/app/models/players_model.dart';
+import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
+import 'package:fetch_five/app/services/dio_client.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
+
+import 'package:logger/web.dart';
 
 class NewGameController extends GetxController {
   final TextEditingController textEditingController = TextEditingController();
+  final dashboardController = Get.find<DashboardController>();
   RxList<PlayersModel> filteredData = RxList<PlayersModel>();
   RxBool isNoResultsFound = false.obs;
+  NewGameModel newGameModel = NewGameModel();
+  final _dio = Get.find<DioClient>();
 
   List<PlayersModel> humanPlayers1 = [
     PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'Seanm'),
@@ -57,6 +66,37 @@ class NewGameController extends GetxController {
         isNoResultsFound.value = false;
       }
       filteredData.assignAll(filteredList);
+    }
+  }
+
+  Future newGame(String oppUid) async {
+    try {
+      dashboardController.screenLoading.value = true;
+      final newGameData =
+          await _dio.post('new-game', data: {"opp_uid": oppUid});
+      newGameModel = NewGameModel.fromJson(newGameData.data);
+      await dashboardController
+          .getYourTurnGameDetails(newGameModel.gameId.toString());
+    } catch (e) {
+      if (e is DioException) {
+        final msg = e.response as Response<dynamic>;
+        Get.snackbar(
+          msg.data['status'],
+          msg.data['message'],
+          backgroundColor: const Color(0xff22222b),
+          colorText: Colors.white,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'An unexpected error occurred.',
+          backgroundColor: const Color(0xff22222b),
+          colorText: Colors.white,
+        );
+        Logger().e('Unexpected error: $e');
+      }
+    } finally {
+      dashboardController.screenLoading.value = false;
     }
   }
 

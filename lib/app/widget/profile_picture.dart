@@ -33,15 +33,15 @@ class ProfilePicture extends StatelessWidget {
 }
 
 class ProfilePictureDesktop extends StatelessWidget {
-  final String imageUrl;
   final Color borderColor;
   final void Function()? onTap;
+  final ImageProvider<Object>? backgroundImage;
 
   const ProfilePictureDesktop({
     super.key,
-    required this.imageUrl,
     required this.borderColor,
     this.onTap,
+    this.backgroundImage,
   });
 
   @override
@@ -54,12 +54,12 @@ class ProfilePictureDesktop extends StatelessWidget {
           shape: BoxShape.circle,
           border: Border.all(
             color: borderColor,
-            width: 6.0, // Fixed border width
+            width: 6.0,
           ),
         ),
         child: CircleAvatar(
-          radius: 24.0, // Fixed radius
-          backgroundImage: AssetImage(imageUrl),
+          radius: 24.0,
+          backgroundImage: backgroundImage,
           backgroundColor: Colors.white,
         ),
       ),

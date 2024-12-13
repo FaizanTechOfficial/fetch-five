@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fetch_five/app/models/available_players_model.dart';
 import 'package:fetch_five/app/models/dashboard_game_model.dart';
 import 'package:fetch_five/app/models/game_details_model.dart';
 import 'package:fetch_five/app/models/game_model.dart';
@@ -20,19 +21,17 @@ class DashboardController extends GetxController
   final SharedPref pref = SharedPref();
   ActiveGamesTurn activeGamesTurn = ActiveGamesTurn();
   PlayerInfoModel playerInfoModel = PlayerInfoModel();
-
   List<GameModel> completedTurnGame = [];
+  AvailablePlayers availablePlayers = AvailablePlayers();
   List<GameModel> yourTurnGame = [];
   List<GameModel> theirTurnGame = [];
-
   String selectedGameId = '';
   String selectedTurnType = '';
-
   Rx<GameDetailModel> gameDetails = Rx<GameDetailModel>(GameDetailModel());
   String yourTurnLabel = '';
   String theirTurnLabel = '';
   String completedTurnLabel = '';
-  int currentIndex = 0;
+  RxInt currentIndex = 0.obs;
   RxBool isLoading = false.obs;
   RxBool screenLoading = false.obs;
   RxBool isDrawerVisible = false.obs;
@@ -44,6 +43,9 @@ class DashboardController extends GetxController
   RxList<Rx<Color>> textColors =
       List.generate(100, (_) => Rx<Color>(Colors.white)).obs;
   final List<RxBool> isSquareClicked = List.generate(100, (index) => false.obs);
+  String? lastGameId;
+  List<Player>? humanPlayers = [];
+  List<Player>? robotPlayers = [];
 
   @override
   void onInit() {
@@ -54,12 +56,20 @@ class DashboardController extends GetxController
   @override
   void onReady() {
     playerInfo();
+    currentIndex.listen((index) {
+      if (index == 3 ||
+          gameDetails.value.gameStatus == 'new' ||
+          gameDetails.value.gameStatus == 'active') {
+        isOnGameBoard.value = true;
+      } else {
+        isOnGameBoard.value = false;
+      }
+    });
     super.onReady();
   }
 
   void updateIndex(int newIndex) {
-    isOnGameBoard.value = false;
-    currentIndex = newIndex;
+    currentIndex.value = newIndex;
     update();
   }
 
@@ -71,11 +81,11 @@ class DashboardController extends GetxController
     isDrawerVisible.value = false;
   }
 
-  void toggleActiveUser(int index) {
-    isUserOneActive.value = !isUserOneActive.value;
-    cardColors[index].value = isUserOneActive.value ? pinkColor : blueColor;
-    textColors[index].value = Colors.black;
-  }
+  // void toggleActiveUser(int index) {
+  //   isUserOneActive.value = !isUserOneActive.value;
+  //   cardColors[index].value = isUserOneActive.value ? pinkColor : blueColor;
+  //   textColors[index].value = Colors.black;
+  // }
 
   void toggleProfileUser() {
     isUserOneActive.value = !isUserOneActive.value;
@@ -89,15 +99,15 @@ class DashboardController extends GetxController
     isLoading.value = false;
   }
 
-  void refreshScreen() {
-    cardColors.value =
-        List.generate(100, (_) => Rx<Color>(const Color(0xff22222B)));
-    textColors.value = List.generate(100, (_) => Rx<Color>(Colors.white));
-    for (var i = 0; i < isSquareClicked.length; i++) {
-      isSquareClicked[i].value = false;
-    }
-    update();
-  }
+  // void refreshScreen() {
+  //   cardColors.value =
+  //       List.generate(100, (_) => Rx<Color>(const Color(0xff22222B)));
+  //   textColors.value = List.generate(100, (_) => Rx<Color>(Colors.white));
+  //   for (var i = 0; i < isSquareClicked.length; i++) {
+  //     isSquareClicked[i].value = false;
+  //   }
+  //   update();
+  // }
 
   Future<dynamic> playerInfo() async {
     try {
@@ -138,6 +148,7 @@ class DashboardController extends GetxController
     try {
       screenLoading.value = true;
       selectedGameId = gameId;
+
       selectedTurnType = 'your';
 
       final yourTurnDetailsResponse =
@@ -145,6 +156,8 @@ class DashboardController extends GetxController
 
       gameDetails.value =
           GameDetailModel.fromJson(yourTurnDetailsResponse.data);
+    } on DioException catch (e) {
+      handleDioException(e);
     } catch (e) {
       Logger().e(e);
     } finally {
@@ -162,6 +175,8 @@ class DashboardController extends GetxController
 
       gameDetails.value =
           GameDetailModel.fromJson(theirTurnDetailsResponse.data);
+    } on DioException catch (e) {
+      handleDioException(e);
     } catch (e) {
       Logger().e(e);
     } finally {
@@ -179,8 +194,31 @@ class DashboardController extends GetxController
 
       gameDetails.value =
           GameDetailModel.fromJson(getCompletedGameDetails.data);
+    } on DioException catch (e) {
+      handleDioException(e);
     } catch (e) {
       Logger().e(e);
+    } finally {
+      screenLoading.value = false;
+    }
+  }
+
+  Future startNewGame() async {
+    try {
+      screenLoading.value = true;
+      final sessionId = await pref.getString('session_id');
+      final response =
+          await _dio.get('available-players', sessionId: sessionId);
+
+      AvailablePlayers availablePlayersData =
+          AvailablePlayers.fromJson(response.data);
+      availablePlayers = availablePlayersData;
+      humanPlayers = availablePlayers.humanPlayers;
+      robotPlayers = availablePlayers.robotPlayers;
+    } on DioException catch (e) {
+      handleDioException(e);
+    } catch (e) {
+      Logger().e(e.toString());
     } finally {
       screenLoading.value = false;
     }

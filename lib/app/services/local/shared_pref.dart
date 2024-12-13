@@ -1,8 +1,10 @@
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
   static const String tokenKey = 'session_id';
   static const String lastRouteKey = 'route_key';
+  static const String last_game_id = 'game_id';
 
   SharedPref._privateConstructor();
 
@@ -17,6 +19,7 @@ class SharedPref {
   Future<void> putString(String key, String value) async {
     SharedPreferences prefs = await _getPrefs();
     await prefs.setString(key, value);
+    Logger().f("Store Pref $key");
   }
 
   Future<void> putBool(String key, bool value) async {
@@ -43,6 +46,7 @@ class SharedPref {
 
   Future<String> getString(String key) async {
     SharedPreferences prefs = await _getPrefs();
+    Logger().f("Get Pref $key");
     return prefs.getString(key) ?? '';
   }
 

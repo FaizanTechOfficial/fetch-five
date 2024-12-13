@@ -9,41 +9,41 @@ import 'package:get/get.dart';
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => LoginController());
+    Get.put(LoginController(), permanent: true);
   }
 }
 
 class DashboardBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => DashboardController());
+    Get.put(DashboardController(), permanent: true);
   }
 }
 
 class ForgotPasswordBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ForgotController());
+    Get.put(ForgotController(), permanent: true);
   }
 }
 
 class CreateAccountBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => CreateAccountController());
+    Get.put(CreateAccountController(), permanent: true);
   }
 }
 
 class NewGameBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => NewGameController());
+    Get.put(NewGameController(), permanent: true);
   }
 }
 
 class ChooseAvatarBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(ChooseAvatarController());
+    Get.put(ChooseAvatarController(), permanent: true);
   }
 }

@@ -34,8 +34,8 @@ class GameDetailModel {
   @JsonKey(name: "player_two_card_count", defaultValue: 0)
   final int? playerTwoCardCount;
 
-  @JsonKey(name: "player_two_last_card", defaultValue: 0)
-  final int playerTwoLastCard;
+  @JsonKey(name: "player_two_last_card", defaultValue: null)
+  final dynamic playerTwoLastCard;
 
   @JsonKey(name: "player_two_name", defaultValue: '')
   final String? playerTwoName;
@@ -63,7 +63,7 @@ class GameDetailModel {
     this.playerOneProfilePic = '',
     this.playerOneSquares = const [],
     this.playerTwoCardCount = 0,
-    this.playerTwoLastCard = 0,
+    this.playerTwoLastCard,
     this.playerTwoName = '',
     this.playerTwoProfilePic = '',
     this.playerTwoSquares = const [],

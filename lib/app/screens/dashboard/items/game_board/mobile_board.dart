@@ -34,9 +34,6 @@ class GameBoardMobileView extends GetView<DashboardController> {
                       Row(
                         children: [
                           ProfilePicture(
-                            onTap: () {
-                              controller.toggleProfileUser();
-                            },
                             borderColor: blueColor,
                             backgroundImage: NetworkImage(
                                 "$imageBaseUrl${controller.gameDetails.value.playerOneProfilePic}"),
@@ -106,8 +103,12 @@ class GameBoardMobileView extends GetView<DashboardController> {
                                   text: controller
                                           .gameDetails.value.playerOneLastCard
                                           ?.toString() ??
-                                      '0',
-                                  cardColor: blueColor,
+                                      '',
+                                  cardColor: controller.gameDetails.value
+                                              .playerOneLastCard ==
+                                          null
+                                      ? Colors.transparent
+                                      : blueColor, //blueColor,
                                 ),
                                 VerticalDivider(
                                   color: const Color.fromARGB(255, 66, 67, 57),
@@ -120,8 +121,12 @@ class GameBoardMobileView extends GetView<DashboardController> {
                                   text: controller
                                           .gameDetails.value.playerTwoLastCard
                                           ?.toString() ??
-                                      '0',
-                                  cardColor: pinkColor,
+                                      '',
+                                  cardColor: controller.gameDetails.value
+                                              .playerTwoLastCard ==
+                                          null
+                                      ? Colors.transparent
+                                      : pinkColor,
                                 ),
                               ],
                             ),
@@ -155,11 +160,11 @@ class GameBoardMobileView extends GetView<DashboardController> {
                                     itemCount: 4,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
-                                      bool isBlue = index <
+                                      bool isPink = index <
                                           controller.gameDetails.value
                                               .playerTwoCardCount!;
                                       return CurrentCardCount(
-                                        color: isBlue ? blueColor : null,
+                                        color: isPink ? pinkColor : null,
                                       );
                                     },
                                     separatorBuilder: (context, index) =>
@@ -171,9 +176,6 @@ class GameBoardMobileView extends GetView<DashboardController> {
                           ),
                           SizedBox(width: 5.w),
                           ProfilePicture(
-                            onTap: () {
-                              controller.toggleProfileUser();
-                            },
                             borderColor: pinkColor,
                             backgroundImage: NetworkImage(
                                 "$imageBaseUrl${controller.gameDetails.value.playerTwoProfilePic}"),
@@ -234,8 +236,8 @@ class GameBoardMobileView extends GetView<DashboardController> {
                     return Obx(
                       () => GameboardSquaresMobile(
                         onTap: () {
-                          controller.toggleActiveUser(index);
-                          controller.isSquareClicked[index].value = true;
+                          // controller.toggleActiveUser(index);
+                          // controller.isSquareClicked[index].value = true;
                         },
                         text: controller.numbers[index].toString(),
                         color: controller.gameDetails.value.thisPlayer ==
@@ -291,12 +293,12 @@ class GameBoardMobileView extends GetView<DashboardController> {
                 const Gap(18),
                 YourCardContainer(
                   radius: 12,
-                  padding: EdgeInsets.symmetric(vertical: 6),
+                  padding: const EdgeInsets.symmetric(vertical: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Gap(1),
-                      Text(
+                      const Gap(1),
+                      const Text(
                         'Your Cards',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -311,24 +313,25 @@ class GameBoardMobileView extends GetView<DashboardController> {
                         itemCount: 4,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          bool isPlayable = index <
-                              controller.gameDetails.value.playerHand!.length;
+                          final sortedPlayerHand = [
+                            ...controller.gameDetails.value.playerHand!
+                          ]..sort();
+
+                          bool isPlayable = index < sortedPlayerHand.length;
 
                           if (isPlayable) {
                             return YourCardPlayable(
-                              text: controller
-                                  .gameDetails.value.playerHand![index]
-                                  .toString(),
+                              text: sortedPlayerHand[index].toString(),
                               color: blueColor,
                             );
                           } else {
-                            return CardFillers();
+                            return const CardFillers();
                           }
                         },
                         separatorBuilder: (context, index) =>
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                       ),
-                      Gap(1)
+                      const Gap(1)
                     ],
                   ),
                 ),

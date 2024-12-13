@@ -91,6 +91,7 @@ class HomeMobile extends GetView<DashboardController> {
               ),
               TextButton.icon(
                 onPressed: () {
+                  controller.startNewGame();
                   Get.toNamed(AppRoutes.newGame);
                 },
                 iconAlignment: IconAlignment.end,
@@ -131,7 +132,7 @@ class HomeMobile extends GetView<DashboardController> {
                               controller.yourTurnGame.length,
                               (index) {
                                 return GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     if (controller.yourTurnGame[index].gameId !=
                                         null) {
                                       controller.getYourTurnGameDetails(

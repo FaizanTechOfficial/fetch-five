@@ -25,7 +25,7 @@ GameDetailModel _$GameDetailModelFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       playerTwoCardCount: (json['player_two_card_count'] as num?)?.toInt() ?? 0,
-      playerTwoLastCard: (json['player_two_last_card'] as num?)?.toInt() ?? 0,
+      playerTwoLastCard: json['player_two_last_card'],
       playerTwoName: json['player_two_name'] as String? ?? '',
       playerTwoProfilePic: json['player_two_profile_pic'] as String? ?? '',
       playerTwoSquares: (json['player_two_squares'] as List<dynamic>?)

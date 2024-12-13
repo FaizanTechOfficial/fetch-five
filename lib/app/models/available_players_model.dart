@@ -3,14 +3,14 @@ part 'available_players_model.g.dart';
 
 @JsonSerializable()
 class AvailablePlayers {
-  @JsonKey(name: "human_players")
-  List<Player> humanPlayers;
-  @JsonKey(name: "robot_players")
-  List<Player> robotPlayers;
+  @JsonKey(name: "human_players", defaultValue: [])
+  List<Player>? humanPlayers;
+  @JsonKey(name: "robot_players", defaultValue: [])
+  List<Player>? robotPlayers;
 
   AvailablePlayers({
-    required this.humanPlayers,
-    required this.robotPlayers,
+    this.humanPlayers,
+    this.robotPlayers,
   });
 
   factory AvailablePlayers.fromJson(Map<String, dynamic> json) =>
@@ -21,17 +21,17 @@ class AvailablePlayers {
 
 @JsonSerializable()
 class Player {
-  @JsonKey(name: "player_id")
-  String playerId;
-  @JsonKey(name: "player_name")
-  String playerName;
-  @JsonKey(name: "profile_pic")
-  String profilePic;
+  @JsonKey(name: "player_id", defaultValue: '')
+  String? playerId;
+  @JsonKey(name: "player_name", defaultValue: '')
+  String? playerName;
+  @JsonKey(name: "profile_pic", defaultValue: '')
+  String? profilePic;
 
   Player({
-    required this.playerId,
-    required this.playerName,
-    required this.profilePic,
+    this.playerId,
+    this.playerName,
+    this.profilePic,
   });
 
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);

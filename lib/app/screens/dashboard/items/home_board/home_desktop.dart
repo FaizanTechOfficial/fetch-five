@@ -91,6 +91,7 @@ class HomeDesktop extends GetView<DashboardController> {
                 ),
                 TextButton.icon(
                   onPressed: () {
+                    controller.startNewGame();
                     Get.toNamed(AppRoutes.newGame);
                   },
                   iconAlignment: IconAlignment.end,
@@ -114,7 +115,7 @@ class HomeDesktop extends GetView<DashboardController> {
                         children: [
                           Text(
                             controller.yourTurnLabel.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                               fontSize: 18,
@@ -181,7 +182,7 @@ class HomeDesktop extends GetView<DashboardController> {
                           const Gap(24),
                           Text(
                             controller.theirTurnLabel.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                               fontSize: 18,
@@ -248,7 +249,7 @@ class HomeDesktop extends GetView<DashboardController> {
                           const Gap(24),
                           Text(
                             controller.completedTurnLabel.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                               fontSize: 18,

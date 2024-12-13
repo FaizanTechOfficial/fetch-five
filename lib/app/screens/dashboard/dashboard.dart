@@ -77,12 +77,15 @@ class DashBoard extends StatelessWidget {
                               svgPath: Assets.icons.document.path,
                               title: 'Instructions'),
                           Gap(20.h),
-                          MenuItem(
-                              onTap: () {
-                                // controller.updateIndex(3);
-                              },
-                              svgPath: Assets.icons.resign.path,
-                              title: 'Resign Game'),
+                          Obx(
+                            () => controller.isOnGameBoard.value
+                                ? MenuItem(
+                                    onTap: () {},
+                                    svgPath: Assets.icons.resign.path,
+                                    title: 'Resign Game',
+                                  )
+                                : const SizedBox.shrink(),
+                          ),
                           Gap(320.h),
                           Obx(
                             () => CustomButton(
@@ -134,6 +137,10 @@ class DashBoard extends StatelessWidget {
                           const Gap(18),
                           CAppbar(
                             onRefresh: () {
+                              if (controller.currentIndex.value == 0) {
+                                controller.playerInfo();
+                                return;
+                              }
                               if (controller.selectedGameId.isNotEmpty) {
                                 switch (controller.selectedTurnType) {
                                   case 'your':
@@ -165,16 +172,17 @@ class DashBoard extends StatelessWidget {
                             },
                             showLoading: controller.isLoading.value,
                           ),
-                          if (controller.isOnGameBoard.value)
+                          if (controller.currentIndex.value == 3 ||
+                              controller.isOnGameBoard.value)
                             const GameBoardMobileView(),
                           if (!controller.isOnGameBoard.value &&
-                              controller.currentIndex == 0)
+                              controller.currentIndex.value == 0)
                             const HomeMobile(),
                           if (!controller.isOnGameBoard.value &&
-                              controller.currentIndex == 1)
+                              controller.currentIndex.value == 1)
                             const InstructionsMobile(),
                           if (!controller.isOnGameBoard.value &&
-                              controller.currentIndex == 2)
+                              controller.currentIndex.value == 2)
                             const ChooseAvatarMobile(),
                           const SizedBox(height: 40),
                         ],
@@ -206,7 +214,7 @@ class DashBoard extends StatelessWidget {
         ),
         bottomSheet: GetBuilder<DashboardController>(
           builder: (controller) {
-            return controller.currentIndex == 2
+            return controller.currentIndex.value == 2
                 ? Container(
                     height: 134.h,
                     padding: EdgeInsets.only(
@@ -249,7 +257,31 @@ class DashBoard extends StatelessWidget {
                             children: [
                               const SizedBox(height: 18),
                               CAppbarDesktop(
-                                onRefresh: controller.playerInfo,
+                                onRefresh: () {
+                                  if (controller.currentIndex.value == 0) {
+                                    controller.playerInfo();
+                                    return;
+                                  }
+                                  if (controller.selectedGameId.isNotEmpty) {
+                                    switch (controller.selectedTurnType) {
+                                      case 'your':
+                                        {
+                                          controller.getYourTurnGameDetails(
+                                              controller.selectedGameId);
+                                        }
+                                      case 'their':
+                                        {
+                                          controller.getTheirTurnGameDetails(
+                                              controller.selectedGameId);
+                                        }
+                                      case 'completed':
+                                        {
+                                          controller.getCompletedGameDetails(
+                                              controller.selectedGameId);
+                                        }
+                                    }
+                                  }
+                                },
                                 onToggleDrawer: () {
                                   controller.isDrawerVisible.value
                                       ? controller.closeDrawer()
@@ -257,16 +289,17 @@ class DashBoard extends StatelessWidget {
                                 },
                                 showLoading: controller.isLoading.value,
                               ),
-                              if (controller.isOnGameBoard.value)
+                              if (controller.currentIndex.value == 3 ||
+                                  controller.isOnGameBoard.value)
                                 const GameBoardDesktopView(),
                               if (!controller.isOnGameBoard.value &&
-                                  controller.currentIndex == 0)
+                                  controller.currentIndex.value == 0)
                                 const HomeDesktop(),
                               if (!controller.isOnGameBoard.value &&
-                                  controller.currentIndex == 1)
+                                  controller.currentIndex.value == 1)
                                 const InstructionsDesktop(),
                               if (!controller.isOnGameBoard.value &&
-                                  controller.currentIndex == 2)
+                                  controller.currentIndex.value == 2)
                                 const ChooseAvatarDesktop(),
                               const SizedBox(height: 40),
                             ],
@@ -336,13 +369,14 @@ class DashBoard extends StatelessWidget {
                                       title: 'Instructions',
                                     ),
                                     const SizedBox(height: 20),
-                                    MenuItemDesktop(
-                                      onTap: () {
-                                        // controller.updateIndex(3);
-                                        controller.closeDrawer();
-                                      },
-                                      svgPath: Assets.icons.resign.path,
-                                      title: 'Resign Game',
+                                    Obx(
+                                      () => controller.isOnGameBoard.value
+                                          ? MenuItemDesktop(
+                                              onTap: () {},
+                                              svgPath: Assets.icons.resign.path,
+                                              title: 'Resign Game',
+                                            )
+                                          : const SizedBox.shrink(),
                                     ),
                                     const Spacer(),
                                     Obx(
@@ -409,7 +443,7 @@ class DashBoard extends StatelessWidget {
         ),
         bottomSheet: GetBuilder<DashboardController>(
           builder: (controller) {
-            return controller.currentIndex == 2
+            return controller.currentIndex.value == 2
                 ? Container(
                     width: 428,
                     height: 134,
