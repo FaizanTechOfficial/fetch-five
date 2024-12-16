@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,6 +16,7 @@ class PlayersBoxesMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('image $image');
     return GestureDetector(
       onTap: onTap,
       child: Container(

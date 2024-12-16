@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/models/new_game_model.dart';
 import 'package:fetch_five/app/models/players_model.dart';
+import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/services/dio_client.dart';
 import 'package:flutter/material.dart';
@@ -14,24 +15,27 @@ class NewGameController extends GetxController {
   final dashboardController = Get.find<DashboardController>();
   RxList<PlayersModel> filteredData = RxList<PlayersModel>();
   RxBool isNoResultsFound = false.obs;
+  bool _isScreenLoader = false;
+  bool get getScreenLoader => _isScreenLoader;
+  RxBool screenLoading = false.obs;
   NewGameModel newGameModel = NewGameModel();
   final _dio = Get.find<DioClient>();
 
-  List<PlayersModel> humanPlayers1 = [
-    PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic017.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic009.path, 'Seanm'),
-  ];
+  // List<PlayersModel> humanPlayers1 = [
+  //   PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic017.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic009.path, 'Seanm'),
+  // ];
 
-  List<PlayersModel> humanPlayers2 = [
-    PlayersModel(Assets.images.fetchfiveProfilePic010.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic014.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic016.path, 'Seanm'),
-    PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
-  ];
+  // List<PlayersModel> humanPlayers2 = [
+  //   PlayersModel(Assets.images.fetchfiveProfilePic010.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic014.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic016.path, 'Seanm'),
+  //   PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
+  // ];
 
   List<PlayersModel> humanPlayerSearch = [
     PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'One'),
@@ -71,12 +75,17 @@ class NewGameController extends GetxController {
 
   Future newGame(String oppUid) async {
     try {
-      dashboardController.screenLoading.value = true;
+      screenLoading.value = true;
       final newGameData =
           await _dio.post('new-game', data: {"opp_uid": oppUid});
       newGameModel = NewGameModel.fromJson(newGameData.data);
-      await dashboardController
+      dashboardController
           .getYourTurnGameDetails(newGameModel.gameId.toString());
+
+      dashboardController.currentIndex.value == 0;
+      dashboardController.isOnGamePlayer.value = false;
+      dashboardController.isOnGameBoard.value = true;
+      Get.offAndToNamed(AppRoutes.game);
     } catch (e) {
       if (e is DioException) {
         final msg = e.response as Response<dynamic>;
@@ -96,7 +105,7 @@ class NewGameController extends GetxController {
         Logger().e('Unexpected error: $e');
       }
     } finally {
-      dashboardController.screenLoading.value = false;
+      screenLoading.value = false;
     }
   }
 

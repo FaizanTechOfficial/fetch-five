@@ -101,7 +101,7 @@ class InstructionsMobile extends GetView<DashboardController> {
             ),
             Gap(10.h),
             Container(
-              width: 170.w,
+              width: 169.w,
               padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
                 color: const Color(0xff22222b),

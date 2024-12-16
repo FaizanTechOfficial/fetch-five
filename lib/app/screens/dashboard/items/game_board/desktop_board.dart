@@ -49,7 +49,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                                 Text(
                                   controller.gameDetails.value.playerOneName
                                       .toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                     overflow: TextOverflow.ellipsis,
                                     fontWeight: FontWeight.w500,
@@ -83,15 +83,15 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                       ),
                       LastCardsContainer(
                         radius: 12,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 8,
                           vertical: 4,
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(height: 4),
-                            Text(
+                            const SizedBox(height: 4),
+                            const Text(
                               'Last Cards\nPlayed',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -115,7 +115,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                                       ? Colors.transparent
                                       : blueColor,
                                 ),
-                                VerticalDivider(
+                                const VerticalDivider(
                                   color: Color.fromARGB(255, 66, 67, 57),
                                   thickness: 1,
                                   width: 8,
@@ -135,7 +135,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                           ],
                         ),
                       ),
@@ -154,7 +154,7 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                                 Text(
                                   controller.gameDetails.value.playerTwoName
                                       .toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     overflow: TextOverflow.ellipsis,
@@ -298,12 +298,12 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                 const SizedBox(height: 18),
                 YourCardContainer(
                   radius: 12,
-                  padding: EdgeInsets.symmetric(vertical: 6),
+                  padding: const EdgeInsets.symmetric(vertical: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Gap(1),
-                      Text(
+                      const Gap(1),
+                      const Text(
                         'Your Cards',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -330,13 +330,13 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                               color: blueColor,
                             );
                           } else {
-                            return CardFillers();
+                            return const CardFillers();
                           }
                         },
                         separatorBuilder: (context, index) =>
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                       ),
-                      Gap(1)
+                      const Gap(1)
                     ],
                   ),
                 ),

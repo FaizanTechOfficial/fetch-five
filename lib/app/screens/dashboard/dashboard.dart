@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fetch_five/app/data/gen/assets.gen.dart';
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_desktop.dart';
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_mobile.dart';
@@ -65,14 +67,19 @@ class DashBoard extends StatelessWidget {
                               onTap: () {
                                 controller.updateIndex(0);
                                 Get.back();
+                                controller.onBoardValue(false);
+                                controller.setOnBoardPlayerValue(false);
                               },
                               svgPath: Assets.icons.home.path,
                               title: 'Home'),
                           Gap(20.h),
                           MenuItem(
                               onTap: () {
+                                log('.................');
                                 controller.updateIndex(1);
                                 Get.back();
+                                controller.onBoardValue(false);
+                                controller.setOnBoardPlayerValue(false);
                               },
                               svgPath: Assets.icons.document.path,
                               title: 'Instructions'),
@@ -125,6 +132,10 @@ class DashBoard extends StatelessWidget {
         backgroundColor: const Color(0xff0A0A14),
         body: GetBuilder<DashboardController>(
           builder: (controller) {
+            log('value of current Index ${controller.currentIndex.value}');
+            log('value of OnBOard status ${controller.isOnGameBoard.value}');
+            log('value of OnGamePlayer status ${controller.isOnGamePlayer.value}');
+
             return Stack(
               children: [
                 SingleChildScrollView(
@@ -137,28 +148,35 @@ class DashBoard extends StatelessWidget {
                           const Gap(18),
                           CAppbar(
                             onRefresh: () {
-                              if (controller.currentIndex.value == 0) {
+                              if (controller.currentIndex.value == 0 &&
+                                  controller.isOnGameBoard.value == false &&
+                                  controller.isOnGamePlayer.value == false) {
                                 controller.playerInfo();
                                 return;
                               }
-                              if (controller.selectedGameId.isNotEmpty) {
-                                switch (controller.selectedTurnType) {
-                                  case 'your':
-                                    {
-                                      controller.getYourTurnGameDetails(
-                                          controller.selectedGameId);
-                                    }
-                                  case 'their':
-                                    {
-                                      controller.getTheirTurnGameDetails(
-                                          controller.selectedGameId);
-                                    }
-                                  case 'completed':
-                                    {
-                                      controller.getCompletedGameDetails(
-                                          controller.selectedGameId);
-                                    }
+                              if (controller.currentIndex.value == 0 &&
+                                  controller.isOnGameBoard.value == true &&
+                                  controller.isOnGamePlayer.value == false) {
+                                if (controller.selectedGameId.isNotEmpty) {
+                                  switch (controller.selectedTurnType) {
+                                    case 'your':
+                                      {
+                                        controller.getYourTurnGameDetails(
+                                            controller.selectedGameId);
+                                      }
+                                    case 'their':
+                                      {
+                                        controller.getTheirTurnGameDetails(
+                                            controller.selectedGameId);
+                                      }
+                                    case 'completed':
+                                      {
+                                        controller.getCompletedGameDetails(
+                                            controller.selectedGameId);
+                                      }
+                                  }
                                 }
+                                return;
                               }
                             },
                             onToggleDrawer: () {
@@ -172,10 +190,12 @@ class DashBoard extends StatelessWidget {
                             },
                             showLoading: controller.isLoading.value,
                           ),
-                          if (controller.currentIndex.value == 3 ||
+                          if (controller.currentIndex.value == 0 &&
+                              !controller.isOnGamePlayer.value &&
                               controller.isOnGameBoard.value)
                             const GameBoardMobileView(),
                           if (!controller.isOnGameBoard.value &&
+                              !controller.isOnGamePlayer.value &&
                               controller.currentIndex.value == 0)
                             const HomeMobile(),
                           if (!controller.isOnGameBoard.value &&
@@ -241,6 +261,9 @@ class DashBoard extends StatelessWidget {
             width: 428,
             child: GetBuilder<DashboardController>(
               builder: (controller) {
+                log('value of current Index ${controller.currentIndex.value}');
+                log('value of OnBOard status ${controller.isOnGameBoard.value}');
+                log('value of OnGamePlayer status ${controller.isOnGamePlayer.value}');
                 return Stack(
                   children: [
                     GestureDetector(
@@ -258,41 +281,58 @@ class DashBoard extends StatelessWidget {
                               const SizedBox(height: 18),
                               CAppbarDesktop(
                                 onRefresh: () {
-                                  if (controller.currentIndex.value == 0) {
+                                  if (controller.currentIndex.value == 0 &&
+                                      controller.isOnGameBoard.value == false &&
+                                      controller.isOnGamePlayer.value ==
+                                          false) {
                                     controller.playerInfo();
                                     return;
                                   }
-                                  if (controller.selectedGameId.isNotEmpty) {
-                                    switch (controller.selectedTurnType) {
-                                      case 'your':
-                                        {
-                                          controller.getYourTurnGameDetails(
-                                              controller.selectedGameId);
-                                        }
-                                      case 'their':
-                                        {
-                                          controller.getTheirTurnGameDetails(
-                                              controller.selectedGameId);
-                                        }
-                                      case 'completed':
-                                        {
-                                          controller.getCompletedGameDetails(
-                                              controller.selectedGameId);
-                                        }
+                                  if (controller.currentIndex.value == 0 &&
+                                      controller.isOnGameBoard.value == true &&
+                                      controller.isOnGamePlayer.value ==
+                                          false) {
+                                    if (controller.selectedGameId.isNotEmpty) {
+                                      switch (controller.selectedTurnType) {
+                                        case 'your':
+                                          {
+                                            controller.getYourTurnGameDetails(
+                                                controller.selectedGameId);
+                                          }
+                                        case 'their':
+                                          {
+                                            controller.getTheirTurnGameDetails(
+                                                controller.selectedGameId);
+                                          }
+                                        case 'completed':
+                                          {
+                                            controller.getCompletedGameDetails(
+                                                controller.selectedGameId);
+                                          }
+                                      }
                                     }
+                                    return;
                                   }
                                 },
                                 onToggleDrawer: () {
-                                  controller.isDrawerVisible.value
-                                      ? controller.closeDrawer()
-                                      : controller.openDrawer();
+                                  if (controller
+                                          .key.currentState?.isEndDrawerOpen ??
+                                      false) {
+                                    controller.key.currentState!
+                                        .closeEndDrawer();
+                                  } else {
+                                    controller.key.currentState!
+                                        .openEndDrawer();
+                                  }
                                 },
                                 showLoading: controller.isLoading.value,
                               ),
-                              if (controller.currentIndex.value == 3 ||
+                              if (controller.currentIndex.value == 0 &&
+                                  !controller.isOnGamePlayer.value &&
                                   controller.isOnGameBoard.value)
                                 const GameBoardDesktopView(),
                               if (!controller.isOnGameBoard.value &&
+                                  !controller.isOnGamePlayer.value &&
                                   controller.currentIndex.value == 0)
                                 const HomeDesktop(),
                               if (!controller.isOnGameBoard.value &&
@@ -354,7 +394,9 @@ class DashBoard extends StatelessWidget {
                                     MenuItemDesktop(
                                       onTap: () {
                                         controller.updateIndex(0);
-                                        controller.closeDrawer();
+                                        Get.back();
+                                        controller.onBoardValue(false);
+                                        controller.setOnBoardPlayerValue(false);
                                       },
                                       svgPath: Assets.icons.home.path,
                                       title: 'Home',
@@ -362,7 +404,11 @@ class DashBoard extends StatelessWidget {
                                     const SizedBox(height: 20),
                                     MenuItemDesktop(
                                       onTap: () {
+                                        log('.................');
                                         controller.updateIndex(1);
+                                        Get.back();
+                                        controller.onBoardValue(false);
+                                        controller.setOnBoardPlayerValue(false);
                                         controller.closeDrawer();
                                       },
                                       svgPath: Assets.icons.document.path,

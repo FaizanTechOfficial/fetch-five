@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:fetch_five/app/models/available_players_model.dart';
 import 'package:fetch_five/app/models/dashboard_game_model.dart';
@@ -17,12 +19,12 @@ import 'package:logger/logger.dart';
 class DashboardController extends GetxController
     with GetSingleTickerProviderStateMixin {
   RxBool isOnGameBoard = false.obs;
+  RxBool isOnGamePlayer = false.obs;
   final _dio = Get.find<DioClient>();
   final SharedPref pref = SharedPref();
   ActiveGamesTurn activeGamesTurn = ActiveGamesTurn();
   PlayerInfoModel playerInfoModel = PlayerInfoModel();
   List<GameModel> completedTurnGame = [];
-  AvailablePlayers availablePlayers = AvailablePlayers();
   List<GameModel> yourTurnGame = [];
   List<GameModel> theirTurnGame = [];
   String selectedGameId = '';
@@ -44,12 +46,21 @@ class DashboardController extends GetxController
       List.generate(100, (_) => Rx<Color>(Colors.white)).obs;
   final List<RxBool> isSquareClicked = List.generate(100, (index) => false.obs);
   String? lastGameId;
-  List<Player>? humanPlayers = [];
-  List<Player>? robotPlayers = [];
+  List<Player?>? humanPlayers = [];
+  List<Player?>? robotPlayers = [];
 
   @override
   void onInit() {
     pref.putString(SharedPref.lastRouteKey, RouteState.home.name);
+    if (currentIndex.value == 0 &&
+        isOnGameBoard.value == false &&
+        isOnGamePlayer.value == false) {
+      screenLoading.value = true;
+      playerInfo();
+    }
+    if (currentIndex.value == 0 &&
+        isOnGameBoard.value == true &&
+        isOnGamePlayer.value == false) {}
     super.onInit();
   }
 
@@ -57,6 +68,7 @@ class DashboardController extends GetxController
   void onReady() {
     playerInfo();
     currentIndex.listen((index) {
+      log('status ${isOnGameBoard.value}');
       if (index == 3 ||
           gameDetails.value.gameStatus == 'new' ||
           gameDetails.value.gameStatus == 'active') {
@@ -66,6 +78,16 @@ class DashboardController extends GetxController
       }
     });
     super.onReady();
+  }
+
+  void onBoardValue(value) {
+    isOnGameBoard.value = value;
+    update();
+  }
+
+  void setOnBoardPlayerValue(value) {
+    isOnGamePlayer.value = value;
+    update();
   }
 
   void updateIndex(int newIndex) {
@@ -206,15 +228,17 @@ class DashboardController extends GetxController
   Future startNewGame() async {
     try {
       screenLoading.value = true;
+      update();
       final sessionId = await pref.getString('session_id');
       final response =
           await _dio.get('available-players', sessionId: sessionId);
+      log('controller ${screenLoading.value}');
 
       AvailablePlayers availablePlayersData =
           AvailablePlayers.fromJson(response.data);
-      availablePlayers = availablePlayersData;
-      humanPlayers = availablePlayers.humanPlayers;
-      robotPlayers = availablePlayers.robotPlayers;
+      humanPlayers = availablePlayersData.humanPlayers;
+      robotPlayers = availablePlayersData.robotPlayers;
+      update();
     } on DioException catch (e) {
       handleDioException(e);
     } catch (e) {

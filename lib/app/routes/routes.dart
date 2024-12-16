@@ -2,7 +2,7 @@ import 'package:fetch_five/app/bindings/bindings.dart';
 import 'package:fetch_five/app/screens/auth/create_account/create_account.dart';
 import 'package:fetch_five/app/screens/auth/forgot_password/forgot_password.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard.dart';
-import 'package:fetch_five/app/screens/dashboard/items/game_board/game_board.dart';
+// import 'package:fetch_five/app/screens/dashboard/items/game_board/game_board.dart';
 import 'package:fetch_five/app/screens/auth/login/login.dart';
 import 'package:fetch_five/app/screens/new_game/new_game.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ class AppRoutes {
   static const forgotPassword = '/forgotPassword';
   static const createAccount = '/createAccount';
   static const game = '/game';
-  static const gameBoard = '/gameBoard';
+  // static const gameBoard = '/gameBoard';
   static const newGame = '/newGame';
 
   static final routes = [
@@ -29,11 +29,11 @@ class AppRoutes {
         ChooseAvatarBinding(),
       ],
     ),
-    GetPage(
-      name: gameBoard,
-      page: () => const GameBoard(),
-      // binding: GameBoardBinding(),
-    ),
+    // GetPage(
+    //   name: gameBoard,
+    //   page: () => const GameBoard(),
+    //   // binding: GameBoardBinding(),
+    // ),
     GetPage(
       name: forgotPassword,
       page: () => const ForgotPassword(),
