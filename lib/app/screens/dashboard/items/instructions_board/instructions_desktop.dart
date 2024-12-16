@@ -69,7 +69,7 @@ class InstructionsDesktop extends GetView<DashboardController> {
                   ),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Vertical',
                         style: TextStyle(
                           fontSize: 12,
@@ -77,7 +77,7 @@ class InstructionsDesktop extends GetView<DashboardController> {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Image(
                         image: AssetImage(Assets.images.vertical.path),
                       ),

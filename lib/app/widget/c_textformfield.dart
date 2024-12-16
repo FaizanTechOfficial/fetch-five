@@ -129,7 +129,7 @@ class CustomTextFormFieldDesktop extends StatelessWidget {
               )
             : null,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12), // Slightly less rounded
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: Color(0xff707070), width: 1.5),
         ),
         focusedBorder: OutlineInputBorder(

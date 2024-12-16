@@ -72,9 +72,8 @@ class MenuItemDesktop extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width:
-            width ?? double.infinity, // Default to full width if not provided
-        height: 52.0, // Fixed height
+        width: width ?? double.infinity,
+        height: 52.0,
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 14.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black),
@@ -85,14 +84,14 @@ class MenuItemDesktop extends StatelessWidget {
           children: [
             SvgPicture.asset(
               svgPath,
-              height: 24.0, // Fixed height
-              width: 24.0, // Fixed width
+              height: 24.0,
+              width: 24.0,
             ),
-            const SizedBox(width: 20.0), // Gap replaced with SizedBox
+            const SizedBox(width: 20.0),
             Text(
               title,
               style: const TextStyle(
-                fontSize: 16.0, // Fixed font size
+                fontSize: 16.0,
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
               ),

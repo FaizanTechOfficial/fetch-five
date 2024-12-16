@@ -21,22 +21,6 @@ class NewGameController extends GetxController {
   NewGameModel newGameModel = NewGameModel();
   final _dio = Get.find<DioClient>();
 
-  // List<PlayersModel> humanPlayers1 = [
-  //   PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic017.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic009.path, 'Seanm'),
-  // ];
-
-  // List<PlayersModel> humanPlayers2 = [
-  //   PlayersModel(Assets.images.fetchfiveProfilePic010.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic014.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic016.path, 'Seanm'),
-  //   PlayersModel(Assets.images.fetchfiveProfilePic015.path, 'Seanm'),
-  // ];
-
   List<PlayersModel> humanPlayerSearch = [
     PlayersModel(Assets.images.fetchfiveProfilePic022.path, 'One'),
     PlayersModel(Assets.images.fetchfiveProfilePic019.path, 'Two'),
@@ -80,7 +64,7 @@ class NewGameController extends GetxController {
           await _dio.post('new-game', data: {"opp_uid": oppUid});
       newGameModel = NewGameModel.fromJson(newGameData.data);
       dashboardController
-          .getYourTurnGameDetails(newGameModel.gameId.toString());
+          .getTheirTurnGameDetails(newGameModel.gameId.toString());
 
       dashboardController.currentIndex.value == 0;
       dashboardController.isOnGamePlayer.value = false;

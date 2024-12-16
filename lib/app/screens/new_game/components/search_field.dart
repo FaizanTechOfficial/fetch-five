@@ -9,7 +9,6 @@ class SearchFieldMobile extends StatelessWidget {
   final String filterIcon;
   final Function onFilterTap;
   final bool enabled;
-  //final void Function()? onTap;
 
   const SearchFieldMobile({
     super.key,
@@ -19,13 +18,11 @@ class SearchFieldMobile extends StatelessWidget {
     required this.filterIcon,
     required this.onFilterTap,
     this.enabled = true,
-    //this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      //onTap: onTap,
       controller: controller,
       style: TextStyle(color: Colors.white, fontSize: 16.sp),
       enabled: enabled,
@@ -92,40 +89,38 @@ class SearchFieldDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: const TextStyle(
-          color: Colors.white, fontSize: 16), // Static font size
+      style: const TextStyle(color: Colors.white, fontSize: 16),
       enabled: enabled,
       decoration: InputDecoration(
         fillColor: const Color(0xff171e20),
         filled: true,
         hintText: hintText,
-        hintStyle: const TextStyle(
-            fontSize: 16, color: Colors.white), // Static font size
+        hintStyle: const TextStyle(fontSize: 16, color: Colors.white),
         prefixIcon: Padding(
-          padding: const EdgeInsets.all(20), // Static padding
+          padding: const EdgeInsets.all(20),
           child: SvgPicture.asset(
             searchIcon,
-            width: 24, // Static width
-            height: 24, // Static height
+            width: 24,
+            height: 24,
           ),
         ),
         suffixIcon: GestureDetector(
           onTap: () => onFilterTap(),
           child: Padding(
-            padding: const EdgeInsets.all(12), // Static padding
+            padding: const EdgeInsets.all(12),
             child: SvgPicture.asset(
               filterIcon,
-              width: 24, // Static width
-              height: 24, // Static height
+              width: 24,
+              height: 24,
             ),
           ),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20), // Static border radius
+          borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(color: Color(0xff8b8e8f)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20), // Static border radius
+          borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(color: Color(0xff8b8e8f)),
         ),
       ),

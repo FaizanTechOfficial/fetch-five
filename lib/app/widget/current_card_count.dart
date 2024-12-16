@@ -59,11 +59,11 @@ class CurrentCardCountDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding,
-      width: width ?? 12.0, // Fixed width
-      height: height ?? 16.0, // Fixed height
+      width: width ?? 12.0,
+      height: height ?? 16.0,
       decoration: BoxDecoration(
         color: color ?? const Color(0xff22222B),
-        borderRadius: BorderRadius.circular(radius ?? 3.0), // Default radius
+        borderRadius: BorderRadius.circular(radius ?? 3.0),
         border: Border.all(
           color: color ?? const Color(0xff22222B),
         ),

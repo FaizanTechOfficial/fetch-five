@@ -15,9 +15,9 @@ class HomeDesktop extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    // if (controller.currentIndex.value == 0) {
-    //   controller.playerInfo();
-    // }
+    if (controller.currentIndex.value == 0) {
+      controller.playerInfo();
+    }
     log('........Chili .............');
     return Container(
       child: Obx(

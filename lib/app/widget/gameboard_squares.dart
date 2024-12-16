@@ -37,8 +37,6 @@ class GameboardSquaresMobile extends StatelessWidget {
               fontSize: 13,
               fontWeight: FontWeight.normal,
               color: isClicked ? Colors.transparent : textColor,
-//              color: Color.fromARGB(255, 183, 196, 198),
-//              color: Color(0xff22222B),
             ),
             textAlign: TextAlign.center,
           ),
@@ -71,7 +69,7 @@ class GameboardSquaresDesktop extends StatelessWidget {
       onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0), // Fixed radius
+          borderRadius: BorderRadius.circular(5.0),
           color: color,
           border: Border.all(
             color: const Color(0xff89BCC5).withOpacity(0.1),
@@ -81,7 +79,7 @@ class GameboardSquaresDesktop extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 13.0, // Fixed font size
+              fontSize: 13.0,
               fontWeight: FontWeight.normal,
               color: isClicked ? Colors.transparent : textColor,
             ),

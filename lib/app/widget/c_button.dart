@@ -50,10 +50,10 @@ class CustomButtonDesktop extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? double.infinity,
-        height: height ?? 64.0, // Default height as a fixed value
+        height: height ?? 64.0,
         decoration: BoxDecoration(
           color: color ?? const Color(0xff04AA6D),
-          borderRadius: BorderRadius.circular(20.0), // Fixed border radius
+          borderRadius: BorderRadius.circular(20.0),
         ),
         child: Center(child: child),
       ),

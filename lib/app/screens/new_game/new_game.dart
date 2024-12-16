@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:fetch_five/app/data/gen/assets.gen.dart';
-import 'package:fetch_five/app/routes/routes.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/screens/new_game/components/players_boxes.dart';
 import 'package:fetch_five/app/screens/new_game/components/search_dialog_widget.dart';
@@ -35,7 +36,7 @@ class _NewGameState extends State<NewGame> {
   Widget build(BuildContext context) {
     final dashboardController = Get.find<DashboardController>();
     final controller = Get.find<NewGameController>();
-    // log('controller.screenLoading ${controller.screenLoading.value}');
+    log('controller.screenLoading ${controller.screenLoading.value}');
     return Responsive(
       mobile: Obx(
         () => dashboardController.screenLoading.value
@@ -186,7 +187,6 @@ class _NewGameState extends State<NewGame> {
                                         .robotPlayers?[index]?.playerId
                                         .toString() ??
                                     '');
-                                Get.offAndToNamed(AppRoutes.game);
                               },
                               image:
                                   "$imageBaseUrl${dashboardController.robotPlayers?[index]?.profilePic}",
@@ -322,7 +322,6 @@ class _NewGameState extends State<NewGame> {
                                             .humanPlayers![index]?.playerId
                                             .toString() ??
                                         '');
-                                    Get.offAndToNamed(AppRoutes.game);
                                   },
                                   image:
                                       "$imageBaseUrl${dashboardController.humanPlayers?[index]?.profilePic}",
@@ -361,7 +360,6 @@ class _NewGameState extends State<NewGame> {
                                             .robotPlayers?[index]?.playerId
                                             .toString() ??
                                         '');
-                                    Get.offAndToNamed(AppRoutes.game);
                                   },
                                   image:
                                       "$imageBaseUrl${dashboardController.robotPlayers?[index]?.profilePic}",

@@ -103,12 +103,6 @@ class DashboardController extends GetxController
     isDrawerVisible.value = false;
   }
 
-  // void toggleActiveUser(int index) {
-  //   isUserOneActive.value = !isUserOneActive.value;
-  //   cardColors[index].value = isUserOneActive.value ? pinkColor : blueColor;
-  //   textColors[index].value = Colors.black;
-  // }
-
   void toggleProfileUser() {
     isUserOneActive.value = !isUserOneActive.value;
   }
@@ -120,16 +114,6 @@ class DashboardController extends GetxController
   void stopLoading() {
     isLoading.value = false;
   }
-
-  // void refreshScreen() {
-  //   cardColors.value =
-  //       List.generate(100, (_) => Rx<Color>(const Color(0xff22222B)));
-  //   textColors.value = List.generate(100, (_) => Rx<Color>(Colors.white));
-  //   for (var i = 0; i < isSquareClicked.length; i++) {
-  //     isSquareClicked[i].value = false;
-  //   }
-  //   update();
-  // }
 
   Future<dynamic> playerInfo() async {
     try {
