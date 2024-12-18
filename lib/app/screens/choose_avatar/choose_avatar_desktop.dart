@@ -6,12 +6,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ChooseAvatarDesktop extends GetView<ChooseAvatarController> {
+class ChooseAvatarDesktop extends StatelessWidget {
   const ChooseAvatarDesktop({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ChooseAvatarController());
+    final controller = Get.find<ChooseAvatarController>();
     return Column(
       children: [
         const Text(

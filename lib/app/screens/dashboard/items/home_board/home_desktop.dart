@@ -10,11 +10,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class HomeDesktop extends GetView<DashboardController> {
+class HomeDesktop extends StatelessWidget {
   const HomeDesktop({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<DashboardController>();
     if (controller.currentIndex.value == 0) {
       controller.playerInfo();
     }

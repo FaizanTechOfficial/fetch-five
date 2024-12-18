@@ -3,6 +3,7 @@ import 'package:fetch_five/app/screens/auth/forgot_password/forgot_controller.da
 import 'package:fetch_five/app/screens/choose_avatar/choose_avatar_controller.dart';
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/screens/auth/login/login_controller.dart';
+import 'package:fetch_five/app/screens/dashboard_new/controller/dashboard_new_controller.dart';
 import 'package:fetch_five/app/screens/new_game/new_game_controller.dart';
 import 'package:get/get.dart';
 

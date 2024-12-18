@@ -1,12 +1,10 @@
 import 'package:fetch_five/app/data/gen/assets.gen.dart';
-import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fetch_five/app/widget/visual_indicators.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 
-class InstructionsMobile extends GetView<DashboardController> {
+class InstructionsMobile extends StatelessWidget {
   const InstructionsMobile({super.key});
 
   @override

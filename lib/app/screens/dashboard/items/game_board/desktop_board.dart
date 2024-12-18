@@ -1,4 +1,5 @@
 import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
+import 'package:fetch_five/app/screens/dashboard/items/game_board/components/square_colors.dart';
 import 'package:fetch_five/app/utils/const.dart';
 import 'package:fetch_five/app/widget/current_card_count.dart';
 import 'package:fetch_five/app/widget/gameboard_squares.dart';
@@ -13,11 +14,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class GameBoardDesktopView extends GetView<DashboardController> {
+class GameBoardDesktopView extends StatelessWidget {
   const GameBoardDesktopView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<DashboardController>();
     return Obx(
       () => controller.screenLoading.value
           ? const Center(
@@ -245,44 +247,6 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                           // controller.isSquareClicked[index].value = true;
                         },
                         text: controller.numbers[index].toString(),
-                        color: controller.gameDetails.value.thisPlayer ==
-                                'player_one'
-                            ? controller.gameDetails.value.thisPlayersTurn ==
-                                    true
-                                ? controller.gameDetails.value.playerOneSquares!
-                                        .contains(controller.numbers[index])
-                                    ? blueColor
-                                    : controller
-                                            .gameDetails.value.playerTwoSquares!
-                                            .contains(controller.numbers[index])
-                                        ? pinkColor
-                                        : const Color(0xff22222B)
-                                : controller.gameDetails.value.playerOneSquares!
-                                        .contains(controller.numbers[index])
-                                    ? blueColor
-                                    : controller
-                                            .gameDetails.value.playerTwoSquares!
-                                            .contains(controller.numbers[index])
-                                        ? pinkColor
-                                        : const Color(0xff22222B)
-                            : controller.gameDetails.value.thisPlayersTurn ==
-                                    true
-                                ? controller.gameDetails.value.playerOneSquares!
-                                        .contains(controller.numbers[index])
-                                    ? blueColor
-                                    : controller
-                                            .gameDetails.value.playerTwoSquares!
-                                            .contains(controller.numbers[index])
-                                        ? pinkColor
-                                        : const Color(0xff22222B)
-                                : controller.gameDetails.value.playerTwoSquares!
-                                        .contains(controller.numbers[index])
-                                    ? blueColor
-                                    : controller
-                                            .gameDetails.value.playerOneSquares!
-                                            .contains(controller.numbers[index])
-                                        ? pinkColor
-                                        : const Color(0xff22222B),
                         textColor: controller
                                     .gameDetails.value.playerOneSquares!
                                     .contains(controller.numbers[index]) ||
@@ -290,6 +254,18 @@ class GameBoardDesktopView extends GetView<DashboardController> {
                                     .contains(controller.numbers[index])
                             ? Colors.transparent
                             : controller.textColors[index].value,
+                        color: getSquareColor(
+                          thisPlayer:
+                              controller.gameDetails.value.thisPlayer ?? '',
+                          thisPlayersTurn:
+                              controller.gameDetails.value.thisPlayersTurn ??
+                                  true,
+                          playerOneSquares:
+                              controller.gameDetails.value.playerOneSquares!,
+                          playerTwoSquares:
+                              controller.gameDetails.value.playerTwoSquares!,
+                          number: controller.numbers[index],
+                        ),
                         isClicked: controller.isSquareClicked[index].value,
                       ),
                     );

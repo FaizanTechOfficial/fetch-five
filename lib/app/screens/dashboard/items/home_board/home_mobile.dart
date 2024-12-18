@@ -11,11 +11,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class HomeMobile extends GetView<DashboardController> {
+class HomeMobile extends StatelessWidget {
   const HomeMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<DashboardController>();
     if (controller.currentIndex.value == 0) {
       controller.playerInfo();
     }

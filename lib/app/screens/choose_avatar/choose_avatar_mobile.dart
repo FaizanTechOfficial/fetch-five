@@ -12,6 +12,7 @@ class ChooseAvatarMobile extends GetView<ChooseAvatarController> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ChooseAvatarController>();
     return Column(
       children: [
         Text(

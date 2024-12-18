@@ -1,10 +1,8 @@
 import 'package:fetch_five/app/data/gen/assets.gen.dart';
-import 'package:fetch_five/app/screens/dashboard/dashboard_controller.dart';
 import 'package:fetch_five/app/widget/visual_indicators.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class InstructionsDesktop extends GetView<DashboardController> {
+class InstructionsDesktop extends StatelessWidget {
   const InstructionsDesktop({super.key});
 
   @override
