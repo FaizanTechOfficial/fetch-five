@@ -19,7 +19,7 @@ class DashboardMobileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // key: dashboardNewController.key,
+        key: dashboardNewController.key,
         endDrawer: Drawer(
           width: 266.w,
           backgroundColor: Colors.transparent,
@@ -76,40 +76,41 @@ class DashboardMobileView extends StatelessWidget {
                           Gap(20.h),
                           // Obx(
                           //   () => dashboardNewController.isOnGameBoard.value
-                          //       ? MenuItem(
-                          //           onTap: () {},
-                          //           svgPath: Assets.icons.resign.path,
-                          //           title: 'Resign Game',
-                          //         )
+                          //       ?
+                          MenuItem(
+                            onTap: () {},
+                            svgPath: Assets.icons.resign.path,
+                            title: 'Resign Game',
+                          ),
                           //       : const SizedBox.shrink(),
                           // ),
                           Gap(320.h),
-                          // Obx(
-                          //   () => CustomButton(
-                          //     onTap: dashboardNewController.logout,
-                          //     color: const Color(0xffFF2124),
-                          //     child: dashboardNewController.isLoading.value
-                          //         ? const CircularProgressIndicator()
-                          //         : Row(
-                          //             mainAxisAlignment:
-                          //                 MainAxisAlignment.center,
-                          //             children: [
-                          //               SvgPicture.asset(
-                          //                 Assets.icons.logout.path,
-                          //                 height: 24.h,
-                          //                 width: 24.w,
-                          //               ),
-                          //               Gap(10.w),
-                          //               const Text(
-                          //                 'Logout',
-                          //                 style: TextStyle(
-                          //                     fontSize: 16,
-                          //                     color: Colors.white),
-                          //               ),
-                          //             ],
-                          //           ),
-                          //   ),
-                          // ),
+                          Obx(
+                            () => CustomButton(
+                              onTap: dashboardNewController.logout,
+                              color: const Color(0xffFF2124),
+                              child: dashboardNewController.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          Assets.icons.logout.path,
+                                          height: 24.h,
+                                          width: 24.w,
+                                        ),
+                                        Gap(10.w),
+                                        const Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -171,18 +172,17 @@ class DashboardMobileView extends StatelessWidget {
                             //   }
                             // },
                             onToggleDrawer: () {
-                              // if (dashboardNewController
-                              //         .key.currentState?.isEndDrawerOpen ??
-                              //     false) {
-                              //   dashboardNewController.key.currentState!
-                              //       .closeEndDrawer();
-                              // } else {
-                              //   dashboardNewController.key.currentState!
-                              //       .openEndDrawer();
-                              // }
+                              if (dashboardNewController
+                                      .key.currentState?.isEndDrawerOpen ??
+                                  false) {
+                                dashboardNewController.key.currentState!
+                                    .closeEndDrawer();
+                              } else {
+                                dashboardNewController.key.currentState!
+                                    .openEndDrawer();
+                              }
                             },
-                            showLoading: false,
-                            // dashboardNewController.isLoading.value,
+                            showLoading: dashboardNewController.isLoading.value,
                           ),
                           // if (dashboardNewController.currentIndex.value ==
                           //         0 &&
@@ -205,24 +205,24 @@ class DashboardMobileView extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Obx(
-                //   () {
-                //     if (dashboardNewController.isLoading.value) {
-                //       return Container(
-                //         color: Colors.black.withOpacity(0.5),
-                //         child: const Center(
-                //           child: CircularProgressIndicator(
-                //             valueColor: AlwaysStoppedAnimation<Color>(
-                //               Color.fromARGB(255, 99, 81, 159),
-                //             ),
-                //           ),
-                //         ),
-                //       );
-                //     } else {
-                //       return const SizedBox.shrink();
-                //     }
-                //   },
-                // ),
+                Obx(
+                  () {
+                    if (dashboardNewController.isLoading.value) {
+                      return Container(
+                        color: Colors.black.withOpacity(0.5),
+                        child: const Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Color.fromARGB(255, 99, 81, 159),
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  },
+                ),
               ],
             );
           },
